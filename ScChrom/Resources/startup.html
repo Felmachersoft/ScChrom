@@ -1,0 +1,1497 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <title>ScChrom - loading</title>
+  <style>
+    /*!
+    Pure v1.0.1
+    Copyright 2013 Yahoo!
+    Licensed under the BSD License.
+    https://github.com/pure-css/pure/blob/master/LICENSE.md
+    */
+    /*!
+    normalize.css v^3.0 | MIT License | git.io/normalize
+    Copyright (c) Nicolas Gallagher and Jonathan Neal
+    */
+    /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block;vertical-align:baseline}audio:not([controls]){display:none;height:0}[hidden],template{display:none}a{background-color:transparent}a:active,a:hover{outline:0}abbr[title]{border-bottom:1px dotted}b,strong{font-weight:700}dfn{font-style:italic}h1{font-size:2em;margin:.67em 0}mark{background:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}img{border:0}svg:not(:root){overflow:hidden}figure{margin:1em 40px}hr{-webkit-box-sizing:content-box;box-sizing:content-box;height:0}pre{overflow:auto}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button{overflow:visible}button,select{text-transform:none}button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}button[disabled],html input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}input{line-height:normal}input[type=checkbox],input[type=radio]{-webkit-box-sizing:border-box;box-sizing:border-box;padding:0}input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{height:auto}input[type=search]{-webkit-appearance:textfield;-webkit-box-sizing:content-box;box-sizing:content-box}input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration{-webkit-appearance:none}fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}legend{border:0;padding:0}textarea{overflow:auto}optgroup{font-weight:700}table{border-collapse:collapse;border-spacing:0}td,th{padding:0}.hidden,[hidden]{display:none!important}.pure-img{max-width:100%;height:auto;display:block}.pure-g{letter-spacing:-.31em;text-rendering:optimizespeed;font-family:FreeSans,Arimo,"Droid Sans",Helvetica,Arial,sans-serif;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-webkit-flex-flow:row wrap;-ms-flex-flow:row wrap;flex-flow:row wrap;-webkit-align-content:flex-start;-ms-flex-line-pack:start;align-content:flex-start}@media all and (-ms-high-contrast:none),(-ms-high-contrast:active){table .pure-g{display:block}}.opera-only :-o-prefocus,.pure-g{word-spacing:-.43em}.pure-u{display:inline-block;zoom:1;letter-spacing:normal;word-spacing:normal;vertical-align:top;text-rendering:auto}.pure-g [class*=pure-u]{font-family:sans-serif}.pure-u-1,.pure-u-1-1,.pure-u-1-12,.pure-u-1-2,.pure-u-1-24,.pure-u-1-3,.pure-u-1-4,.pure-u-1-5,.pure-u-1-6,.pure-u-1-8,.pure-u-10-24,.pure-u-11-12,.pure-u-11-24,.pure-u-12-24,.pure-u-13-24,.pure-u-14-24,.pure-u-15-24,.pure-u-16-24,.pure-u-17-24,.pure-u-18-24,.pure-u-19-24,.pure-u-2-24,.pure-u-2-3,.pure-u-2-5,.pure-u-20-24,.pure-u-21-24,.pure-u-22-24,.pure-u-23-24,.pure-u-24-24,.pure-u-3-24,.pure-u-3-4,.pure-u-3-5,.pure-u-3-8,.pure-u-4-24,.pure-u-4-5,.pure-u-5-12,.pure-u-5-24,.pure-u-5-5,.pure-u-5-6,.pure-u-5-8,.pure-u-6-24,.pure-u-7-12,.pure-u-7-24,.pure-u-7-8,.pure-u-8-24,.pure-u-9-24{display:inline-block;zoom:1;letter-spacing:normal;word-spacing:normal;vertical-align:top;text-rendering:auto}.pure-u-1-24{width:4.1667%}.pure-u-1-12,.pure-u-2-24{width:8.3333%}.pure-u-1-8,.pure-u-3-24{width:12.5%}.pure-u-1-6,.pure-u-4-24{width:16.6667%}.pure-u-1-5{width:20%}.pure-u-5-24{width:20.8333%}.pure-u-1-4,.pure-u-6-24{width:25%}.pure-u-7-24{width:29.1667%}.pure-u-1-3,.pure-u-8-24{width:33.3333%}.pure-u-3-8,.pure-u-9-24{width:37.5%}.pure-u-2-5{width:40%}.pure-u-10-24,.pure-u-5-12{width:41.6667%}.pure-u-11-24{width:45.8333%}.pure-u-1-2,.pure-u-12-24{width:50%}.pure-u-13-24{width:54.1667%}.pure-u-14-24,.pure-u-7-12{width:58.3333%}.pure-u-3-5{width:60%}.pure-u-15-24,.pure-u-5-8{width:62.5%}.pure-u-16-24,.pure-u-2-3{width:66.6667%}.pure-u-17-24{width:70.8333%}.pure-u-18-24,.pure-u-3-4{width:75%}.pure-u-19-24{width:79.1667%}.pure-u-4-5{width:80%}.pure-u-20-24,.pure-u-5-6{width:83.3333%}.pure-u-21-24,.pure-u-7-8{width:87.5%}.pure-u-11-12,.pure-u-22-24{width:91.6667%}.pure-u-23-24{width:95.8333%}.pure-u-1,.pure-u-1-1,.pure-u-24-24,.pure-u-5-5{width:100%}.pure-button{display:inline-block;zoom:1;line-height:normal;white-space:nowrap;vertical-align:middle;text-align:center;cursor:pointer;-webkit-user-drag:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-box-sizing:border-box;box-sizing:border-box}.pure-button::-moz-focus-inner{padding:0;border:0}.pure-button-group{letter-spacing:-.31em;text-rendering:optimizespeed}.opera-only :-o-prefocus,.pure-button-group{word-spacing:-.43em}.pure-button-group .pure-button{letter-spacing:normal;word-spacing:normal;vertical-align:top;text-rendering:auto}.pure-button{font-family:inherit;font-size:100%;padding:.5em 1em;color:#444;color:rgba(0,0,0,.8);border:1px solid #999;border:none transparent;background-color:#e6e6e6;text-decoration:none;border-radius:2px}.pure-button-hover,.pure-button:focus,.pure-button:hover{background-image:-webkit-gradient(linear,left top,left bottom,from(transparent),color-stop(40%,rgba(0,0,0,.05)),to(rgba(0,0,0,.1)));background-image:-webkit-linear-gradient(transparent,rgba(0,0,0,.05) 40%,rgba(0,0,0,.1));background-image:linear-gradient(transparent,rgba(0,0,0,.05) 40%,rgba(0,0,0,.1))}.pure-button:focus{outline:0}.pure-button-active,.pure-button:active{-webkit-box-shadow:0 0 0 1px rgba(0,0,0,.15) inset,0 0 6px rgba(0,0,0,.2) inset;box-shadow:0 0 0 1px rgba(0,0,0,.15) inset,0 0 6px rgba(0,0,0,.2) inset;border-color:#000}.pure-button-disabled,.pure-button-disabled:active,.pure-button-disabled:focus,.pure-button-disabled:hover,.pure-button[disabled]{border:none;background-image:none;opacity:.4;cursor:not-allowed;-webkit-box-shadow:none;box-shadow:none;pointer-events:none}.pure-button-hidden{display:none}.pure-button-primary,.pure-button-selected,a.pure-button-primary,a.pure-button-selected{background-color:#0078e7;color:#fff}.pure-button-group .pure-button{margin:0;border-radius:0;border-right:1px solid #111;border-right:1px solid rgba(0,0,0,.2)}.pure-button-group .pure-button:first-child{border-top-left-radius:2px;border-bottom-left-radius:2px}.pure-button-group .pure-button:last-child{border-top-right-radius:2px;border-bottom-right-radius:2px;border-right:none}.pure-form input[type=color],.pure-form input[type=date],.pure-form input[type=datetime-local],.pure-form input[type=datetime],.pure-form input[type=email],.pure-form input[type=month],.pure-form input[type=number],.pure-form input[type=password],.pure-form input[type=search],.pure-form input[type=tel],.pure-form input[type=text],.pure-form input[type=time],.pure-form input[type=url],.pure-form input[type=week],.pure-form select,.pure-form textarea{padding:.5em .6em;display:inline-block;border:1px solid #ccc;-webkit-box-shadow:inset 0 1px 3px #ddd;box-shadow:inset 0 1px 3px #ddd;border-radius:4px;vertical-align:middle;-webkit-box-sizing:border-box;box-sizing:border-box}.pure-form input:not([type]){padding:.5em .6em;display:inline-block;border:1px solid #ccc;-webkit-box-shadow:inset 0 1px 3px #ddd;box-shadow:inset 0 1px 3px #ddd;border-radius:4px;-webkit-box-sizing:border-box;box-sizing:border-box}.pure-form input[type=color]{padding:.2em .5em}.pure-form input[type=color]:focus,.pure-form input[type=date]:focus,.pure-form input[type=datetime-local]:focus,.pure-form input[type=datetime]:focus,.pure-form input[type=email]:focus,.pure-form input[type=month]:focus,.pure-form input[type=number]:focus,.pure-form input[type=password]:focus,.pure-form input[type=search]:focus,.pure-form input[type=tel]:focus,.pure-form input[type=text]:focus,.pure-form input[type=time]:focus,.pure-form input[type=url]:focus,.pure-form input[type=week]:focus,.pure-form select:focus,.pure-form textarea:focus{outline:0;border-color:#129fea}.pure-form input:not([type]):focus{outline:0;border-color:#129fea}.pure-form input[type=checkbox]:focus,.pure-form input[type=file]:focus,.pure-form input[type=radio]:focus{outline:thin solid #129fea;outline:1px auto #129fea}.pure-form .pure-checkbox,.pure-form .pure-radio{margin:.5em 0;display:block}.pure-form input[type=color][disabled],.pure-form input[type=date][disabled],.pure-form input[type=datetime-local][disabled],.pure-form input[type=datetime][disabled],.pure-form input[type=email][disabled],.pure-form input[type=month][disabled],.pure-form input[type=number][disabled],.pure-form input[type=password][disabled],.pure-form input[type=search][disabled],.pure-form input[type=tel][disabled],.pure-form input[type=text][disabled],.pure-form input[type=time][disabled],.pure-form input[type=url][disabled],.pure-form input[type=week][disabled],.pure-form select[disabled],.pure-form textarea[disabled]{cursor:not-allowed;background-color:#eaeded;color:#cad2d3}.pure-form input:not([type])[disabled]{cursor:not-allowed;background-color:#eaeded;color:#cad2d3}.pure-form input[readonly],.pure-form select[readonly],.pure-form textarea[readonly]{background-color:#eee;color:#777;border-color:#ccc}.pure-form input:focus:invalid,.pure-form select:focus:invalid,.pure-form textarea:focus:invalid{color:#b94a48;border-color:#e9322d}.pure-form input[type=checkbox]:focus:invalid:focus,.pure-form input[type=file]:focus:invalid:focus,.pure-form input[type=radio]:focus:invalid:focus{outline-color:#e9322d}.pure-form select{height:2.25em;border:1px solid #ccc;background-color:#fff}.pure-form select[multiple]{height:auto}.pure-form label{margin:.5em 0 .2em}.pure-form fieldset{margin:0;padding:.35em 0 .75em;border:0}.pure-form legend{display:block;width:100%;padding:.3em 0;margin-bottom:.3em;color:#333;border-bottom:1px solid #e5e5e5}.pure-form-stacked input[type=color],.pure-form-stacked input[type=date],.pure-form-stacked input[type=datetime-local],.pure-form-stacked input[type=datetime],.pure-form-stacked input[type=email],.pure-form-stacked input[type=file],.pure-form-stacked input[type=month],.pure-form-stacked input[type=number],.pure-form-stacked input[type=password],.pure-form-stacked input[type=search],.pure-form-stacked input[type=tel],.pure-form-stacked input[type=text],.pure-form-stacked input[type=time],.pure-form-stacked input[type=url],.pure-form-stacked input[type=week],.pure-form-stacked label,.pure-form-stacked select,.pure-form-stacked textarea{display:block;margin:.25em 0}.pure-form-stacked input:not([type]){display:block;margin:.25em 0}.pure-form-aligned .pure-help-inline,.pure-form-aligned input,.pure-form-aligned select,.pure-form-aligned textarea,.pure-form-message-inline{display:inline-block;vertical-align:middle}.pure-form-aligned textarea{vertical-align:top}.pure-form-aligned .pure-control-group{margin-bottom:.5em}.pure-form-aligned .pure-control-group label{text-align:right;display:inline-block;vertical-align:middle;width:10em;margin:0 1em 0 0}.pure-form-aligned .pure-controls{margin:1.5em 0 0 11em}.pure-form .pure-input-rounded,.pure-form input.pure-input-rounded{border-radius:2em;padding:.5em 1em}.pure-form .pure-group fieldset{margin-bottom:10px}.pure-form .pure-group input,.pure-form .pure-group textarea{display:block;padding:10px;margin:0 0 -1px;border-radius:0;position:relative;top:-1px}.pure-form .pure-group input:focus,.pure-form .pure-group textarea:focus{z-index:3}.pure-form .pure-group input:first-child,.pure-form .pure-group textarea:first-child{top:1px;border-radius:4px 4px 0 0;margin:0}.pure-form .pure-group input:first-child:last-child,.pure-form .pure-group textarea:first-child:last-child{top:1px;border-radius:4px;margin:0}.pure-form .pure-group input:last-child,.pure-form .pure-group textarea:last-child{top:-2px;border-radius:0 0 4px 4px;margin:0}.pure-form .pure-group button{margin:.35em 0}.pure-form .pure-input-1{width:100%}.pure-form .pure-input-3-4{width:75%}.pure-form .pure-input-2-3{width:66%}.pure-form .pure-input-1-2{width:50%}.pure-form .pure-input-1-3{width:33%}.pure-form .pure-input-1-4{width:25%}.pure-form .pure-help-inline,.pure-form-message-inline{display:inline-block;padding-left:.3em;color:#666;vertical-align:middle;font-size:.875em}.pure-form-message{display:block;color:#666;font-size:.875em}@media only screen and (max-width :480px){.pure-form button[type=submit]{margin:.7em 0 0}.pure-form input:not([type]),.pure-form input[type=color],.pure-form input[type=date],.pure-form input[type=datetime-local],.pure-form input[type=datetime],.pure-form input[type=email],.pure-form input[type=month],.pure-form input[type=number],.pure-form input[type=password],.pure-form input[type=search],.pure-form input[type=tel],.pure-form input[type=text],.pure-form input[type=time],.pure-form input[type=url],.pure-form input[type=week],.pure-form label{margin-bottom:.3em;display:block}.pure-group input:not([type]),.pure-group input[type=color],.pure-group input[type=date],.pure-group input[type=datetime-local],.pure-group input[type=datetime],.pure-group input[type=email],.pure-group input[type=month],.pure-group input[type=number],.pure-group input[type=password],.pure-group input[type=search],.pure-group input[type=tel],.pure-group input[type=text],.pure-group input[type=time],.pure-group input[type=url],.pure-group input[type=week]{margin-bottom:0}.pure-form-aligned .pure-control-group label{margin-bottom:.3em;text-align:left;display:block;width:100%}.pure-form-aligned .pure-controls{margin:1.5em 0 0 0}.pure-form .pure-help-inline,.pure-form-message,.pure-form-message-inline{display:block;font-size:.75em;padding:.2em 0 .8em}}.pure-menu{-webkit-box-sizing:border-box;box-sizing:border-box}.pure-menu-fixed{position:fixed;left:0;top:0;z-index:3}.pure-menu-item,.pure-menu-list{position:relative}.pure-menu-list{list-style:none;margin:0;padding:0}.pure-menu-item{padding:0;margin:0;height:100%}.pure-menu-heading,.pure-menu-link{display:block;text-decoration:none;white-space:nowrap}.pure-menu-horizontal{width:100%;white-space:nowrap}.pure-menu-horizontal .pure-menu-list{display:inline-block}.pure-menu-horizontal .pure-menu-heading,.pure-menu-horizontal .pure-menu-item,.pure-menu-horizontal .pure-menu-separator{display:inline-block;zoom:1;vertical-align:middle}.pure-menu-item .pure-menu-item{display:block}.pure-menu-children{display:none;position:absolute;left:100%;top:0;margin:0;padding:0;z-index:3}.pure-menu-horizontal .pure-menu-children{left:0;top:auto;width:inherit}.pure-menu-active>.pure-menu-children,.pure-menu-allow-hover:hover>.pure-menu-children{display:block;position:absolute}.pure-menu-has-children>.pure-menu-link:after{padding-left:.5em;content:"\25B8";font-size:small}.pure-menu-horizontal .pure-menu-has-children>.pure-menu-link:after{content:"\25BE"}.pure-menu-scrollable{overflow-y:scroll;overflow-x:hidden}.pure-menu-scrollable .pure-menu-list{display:block}.pure-menu-horizontal.pure-menu-scrollable .pure-menu-list{display:inline-block}.pure-menu-horizontal.pure-menu-scrollable{white-space:nowrap;overflow-y:hidden;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:.5em 0}.pure-menu-horizontal .pure-menu-children .pure-menu-separator,.pure-menu-separator{background-color:#ccc;height:1px;margin:.3em 0}.pure-menu-horizontal .pure-menu-separator{width:1px;height:1.3em;margin:0 .3em}.pure-menu-horizontal .pure-menu-children .pure-menu-separator{display:block;width:auto}.pure-menu-heading{text-transform:uppercase;color:#565d64}.pure-menu-link{color:#777}.pure-menu-children{background-color:#fff}.pure-menu-disabled,.pure-menu-heading,.pure-menu-link{padding:.5em 1em}.pure-menu-disabled{opacity:.5}.pure-menu-disabled .pure-menu-link:hover{background-color:transparent}.pure-menu-active>.pure-menu-link,.pure-menu-link:focus,.pure-menu-link:hover{background-color:#eee}.pure-menu-selected>.pure-menu-link,.pure-menu-selected>.pure-menu-link:visited{color:#000}.pure-table{border-collapse:collapse;border-spacing:0;empty-cells:show;border:1px solid #cbcbcb}.pure-table caption{color:#000;font:italic 85%/1 arial,sans-serif;padding:1em 0;text-align:center}.pure-table td,.pure-table th{border-left:1px solid #cbcbcb;border-width:0 0 0 1px;font-size:inherit;margin:0;overflow:visible;padding:.5em 1em}.pure-table thead{background-color:#e0e0e0;color:#000;text-align:left;vertical-align:bottom}.pure-table td{background-color:transparent}.pure-table-odd td{background-color:#f2f2f2}.pure-table-striped tr:nth-child(2n-1) td{background-color:#f2f2f2}.pure-table-bordered td{border-bottom:1px solid #cbcbcb}.pure-table-bordered tbody>tr:last-child>td{border-bottom-width:0}.pure-table-horizontal td,.pure-table-horizontal th{border-width:0 0 1px 0;border-bottom:1px solid #cbcbcb}.pure-table-horizontal tbody>tr:last-child>td{border-bottom-width:0}
+
+    /*!
+    Pure v1.0.1
+    Copyright 2013 Yahoo!
+    Licensed under the BSD License.
+    https://github.com/pure-css/pure/blob/master/LICENSE.md
+    */
+    .pure-g{letter-spacing:-.31em;text-rendering:optimizespeed;font-family:FreeSans,Arimo,"Droid Sans",Helvetica,Arial,sans-serif;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-webkit-flex-flow:row wrap;-ms-flex-flow:row wrap;flex-flow:row wrap;-webkit-align-content:flex-start;-ms-flex-line-pack:start;align-content:flex-start}@media all and (-ms-high-contrast:none),(-ms-high-contrast:active){table .pure-g{display:block}}.opera-only :-o-prefocus,.pure-g{word-spacing:-.43em}.pure-u{display:inline-block;zoom:1;letter-spacing:normal;word-spacing:normal;vertical-align:top;text-rendering:auto}.pure-g [class*=pure-u]{font-family:sans-serif}
+
+    /*!
+    Pure v1.0.1
+    Copyright 2013 Yahoo!
+    Licensed under the BSD License.
+    https://github.com/pure-css/pure/blob/master/LICENSE.md
+    */
+    @media screen and (min-width:35.5em){.pure-u-sm-1,.pure-u-sm-1-1,.pure-u-sm-1-12,.pure-u-sm-1-2,.pure-u-sm-1-24,.pure-u-sm-1-3,.pure-u-sm-1-4,.pure-u-sm-1-5,.pure-u-sm-1-6,.pure-u-sm-1-8,.pure-u-sm-10-24,.pure-u-sm-11-12,.pure-u-sm-11-24,.pure-u-sm-12-24,.pure-u-sm-13-24,.pure-u-sm-14-24,.pure-u-sm-15-24,.pure-u-sm-16-24,.pure-u-sm-17-24,.pure-u-sm-18-24,.pure-u-sm-19-24,.pure-u-sm-2-24,.pure-u-sm-2-3,.pure-u-sm-2-5,.pure-u-sm-20-24,.pure-u-sm-21-24,.pure-u-sm-22-24,.pure-u-sm-23-24,.pure-u-sm-24-24,.pure-u-sm-3-24,.pure-u-sm-3-4,.pure-u-sm-3-5,.pure-u-sm-3-8,.pure-u-sm-4-24,.pure-u-sm-4-5,.pure-u-sm-5-12,.pure-u-sm-5-24,.pure-u-sm-5-5,.pure-u-sm-5-6,.pure-u-sm-5-8,.pure-u-sm-6-24,.pure-u-sm-7-12,.pure-u-sm-7-24,.pure-u-sm-7-8,.pure-u-sm-8-24,.pure-u-sm-9-24{display:inline-block;zoom:1;letter-spacing:normal;word-spacing:normal;vertical-align:top;text-rendering:auto}.pure-u-sm-1-24{width:4.1667%}.pure-u-sm-1-12,.pure-u-sm-2-24{width:8.3333%}.pure-u-sm-1-8,.pure-u-sm-3-24{width:12.5%}.pure-u-sm-1-6,.pure-u-sm-4-24{width:16.6667%}.pure-u-sm-1-5{width:20%}.pure-u-sm-5-24{width:20.8333%}.pure-u-sm-1-4,.pure-u-sm-6-24{width:25%}.pure-u-sm-7-24{width:29.1667%}.pure-u-sm-1-3,.pure-u-sm-8-24{width:33.3333%}.pure-u-sm-3-8,.pure-u-sm-9-24{width:37.5%}.pure-u-sm-2-5{width:40%}.pure-u-sm-10-24,.pure-u-sm-5-12{width:41.6667%}.pure-u-sm-11-24{width:45.8333%}.pure-u-sm-1-2,.pure-u-sm-12-24{width:50%}.pure-u-sm-13-24{width:54.1667%}.pure-u-sm-14-24,.pure-u-sm-7-12{width:58.3333%}.pure-u-sm-3-5{width:60%}.pure-u-sm-15-24,.pure-u-sm-5-8{width:62.5%}.pure-u-sm-16-24,.pure-u-sm-2-3{width:66.6667%}.pure-u-sm-17-24{width:70.8333%}.pure-u-sm-18-24,.pure-u-sm-3-4{width:75%}.pure-u-sm-19-24{width:79.1667%}.pure-u-sm-4-5{width:80%}.pure-u-sm-20-24,.pure-u-sm-5-6{width:83.3333%}.pure-u-sm-21-24,.pure-u-sm-7-8{width:87.5%}.pure-u-sm-11-12,.pure-u-sm-22-24{width:91.6667%}.pure-u-sm-23-24{width:95.8333%}.pure-u-sm-1,.pure-u-sm-1-1,.pure-u-sm-24-24,.pure-u-sm-5-5{width:100%}}@media screen and (min-width:48em){.pure-u-md-1,.pure-u-md-1-1,.pure-u-md-1-12,.pure-u-md-1-2,.pure-u-md-1-24,.pure-u-md-1-3,.pure-u-md-1-4,.pure-u-md-1-5,.pure-u-md-1-6,.pure-u-md-1-8,.pure-u-md-10-24,.pure-u-md-11-12,.pure-u-md-11-24,.pure-u-md-12-24,.pure-u-md-13-24,.pure-u-md-14-24,.pure-u-md-15-24,.pure-u-md-16-24,.pure-u-md-17-24,.pure-u-md-18-24,.pure-u-md-19-24,.pure-u-md-2-24,.pure-u-md-2-3,.pure-u-md-2-5,.pure-u-md-20-24,.pure-u-md-21-24,.pure-u-md-22-24,.pure-u-md-23-24,.pure-u-md-24-24,.pure-u-md-3-24,.pure-u-md-3-4,.pure-u-md-3-5,.pure-u-md-3-8,.pure-u-md-4-24,.pure-u-md-4-5,.pure-u-md-5-12,.pure-u-md-5-24,.pure-u-md-5-5,.pure-u-md-5-6,.pure-u-md-5-8,.pure-u-md-6-24,.pure-u-md-7-12,.pure-u-md-7-24,.pure-u-md-7-8,.pure-u-md-8-24,.pure-u-md-9-24{display:inline-block;zoom:1;letter-spacing:normal;word-spacing:normal;vertical-align:top;text-rendering:auto}.pure-u-md-1-24{width:4.1667%}.pure-u-md-1-12,.pure-u-md-2-24{width:8.3333%}.pure-u-md-1-8,.pure-u-md-3-24{width:12.5%}.pure-u-md-1-6,.pure-u-md-4-24{width:16.6667%}.pure-u-md-1-5{width:20%}.pure-u-md-5-24{width:20.8333%}.pure-u-md-1-4,.pure-u-md-6-24{width:25%}.pure-u-md-7-24{width:29.1667%}.pure-u-md-1-3,.pure-u-md-8-24{width:33.3333%}.pure-u-md-3-8,.pure-u-md-9-24{width:37.5%}.pure-u-md-2-5{width:40%}.pure-u-md-10-24,.pure-u-md-5-12{width:41.6667%}.pure-u-md-11-24{width:45.8333%}.pure-u-md-1-2,.pure-u-md-12-24{width:50%}.pure-u-md-13-24{width:54.1667%}.pure-u-md-14-24,.pure-u-md-7-12{width:58.3333%}.pure-u-md-3-5{width:60%}.pure-u-md-15-24,.pure-u-md-5-8{width:62.5%}.pure-u-md-16-24,.pure-u-md-2-3{width:66.6667%}.pure-u-md-17-24{width:70.8333%}.pure-u-md-18-24,.pure-u-md-3-4{width:75%}.pure-u-md-19-24{width:79.1667%}.pure-u-md-4-5{width:80%}.pure-u-md-20-24,.pure-u-md-5-6{width:83.3333%}.pure-u-md-21-24,.pure-u-md-7-8{width:87.5%}.pure-u-md-11-12,.pure-u-md-22-24{width:91.6667%}.pure-u-md-23-24{width:95.8333%}.pure-u-md-1,.pure-u-md-1-1,.pure-u-md-24-24,.pure-u-md-5-5{width:100%}}@media screen and (min-width:64em){.pure-u-lg-1,.pure-u-lg-1-1,.pure-u-lg-1-12,.pure-u-lg-1-2,.pure-u-lg-1-24,.pure-u-lg-1-3,.pure-u-lg-1-4,.pure-u-lg-1-5,.pure-u-lg-1-6,.pure-u-lg-1-8,.pure-u-lg-10-24,.pure-u-lg-11-12,.pure-u-lg-11-24,.pure-u-lg-12-24,.pure-u-lg-13-24,.pure-u-lg-14-24,.pure-u-lg-15-24,.pure-u-lg-16-24,.pure-u-lg-17-24,.pure-u-lg-18-24,.pure-u-lg-19-24,.pure-u-lg-2-24,.pure-u-lg-2-3,.pure-u-lg-2-5,.pure-u-lg-20-24,.pure-u-lg-21-24,.pure-u-lg-22-24,.pure-u-lg-23-24,.pure-u-lg-24-24,.pure-u-lg-3-24,.pure-u-lg-3-4,.pure-u-lg-3-5,.pure-u-lg-3-8,.pure-u-lg-4-24,.pure-u-lg-4-5,.pure-u-lg-5-12,.pure-u-lg-5-24,.pure-u-lg-5-5,.pure-u-lg-5-6,.pure-u-lg-5-8,.pure-u-lg-6-24,.pure-u-lg-7-12,.pure-u-lg-7-24,.pure-u-lg-7-8,.pure-u-lg-8-24,.pure-u-lg-9-24{display:inline-block;zoom:1;letter-spacing:normal;word-spacing:normal;vertical-align:top;text-rendering:auto}.pure-u-lg-1-24{width:4.1667%}.pure-u-lg-1-12,.pure-u-lg-2-24{width:8.3333%}.pure-u-lg-1-8,.pure-u-lg-3-24{width:12.5%}.pure-u-lg-1-6,.pure-u-lg-4-24{width:16.6667%}.pure-u-lg-1-5{width:20%}.pure-u-lg-5-24{width:20.8333%}.pure-u-lg-1-4,.pure-u-lg-6-24{width:25%}.pure-u-lg-7-24{width:29.1667%}.pure-u-lg-1-3,.pure-u-lg-8-24{width:33.3333%}.pure-u-lg-3-8,.pure-u-lg-9-24{width:37.5%}.pure-u-lg-2-5{width:40%}.pure-u-lg-10-24,.pure-u-lg-5-12{width:41.6667%}.pure-u-lg-11-24{width:45.8333%}.pure-u-lg-1-2,.pure-u-lg-12-24{width:50%}.pure-u-lg-13-24{width:54.1667%}.pure-u-lg-14-24,.pure-u-lg-7-12{width:58.3333%}.pure-u-lg-3-5{width:60%}.pure-u-lg-15-24,.pure-u-lg-5-8{width:62.5%}.pure-u-lg-16-24,.pure-u-lg-2-3{width:66.6667%}.pure-u-lg-17-24{width:70.8333%}.pure-u-lg-18-24,.pure-u-lg-3-4{width:75%}.pure-u-lg-19-24{width:79.1667%}.pure-u-lg-4-5{width:80%}.pure-u-lg-20-24,.pure-u-lg-5-6{width:83.3333%}.pure-u-lg-21-24,.pure-u-lg-7-8{width:87.5%}.pure-u-lg-11-12,.pure-u-lg-22-24{width:91.6667%}.pure-u-lg-23-24{width:95.8333%}.pure-u-lg-1,.pure-u-lg-1-1,.pure-u-lg-24-24,.pure-u-lg-5-5{width:100%}}@media screen and (min-width:80em){.pure-u-xl-1,.pure-u-xl-1-1,.pure-u-xl-1-12,.pure-u-xl-1-2,.pure-u-xl-1-24,.pure-u-xl-1-3,.pure-u-xl-1-4,.pure-u-xl-1-5,.pure-u-xl-1-6,.pure-u-xl-1-8,.pure-u-xl-10-24,.pure-u-xl-11-12,.pure-u-xl-11-24,.pure-u-xl-12-24,.pure-u-xl-13-24,.pure-u-xl-14-24,.pure-u-xl-15-24,.pure-u-xl-16-24,.pure-u-xl-17-24,.pure-u-xl-18-24,.pure-u-xl-19-24,.pure-u-xl-2-24,.pure-u-xl-2-3,.pure-u-xl-2-5,.pure-u-xl-20-24,.pure-u-xl-21-24,.pure-u-xl-22-24,.pure-u-xl-23-24,.pure-u-xl-24-24,.pure-u-xl-3-24,.pure-u-xl-3-4,.pure-u-xl-3-5,.pure-u-xl-3-8,.pure-u-xl-4-24,.pure-u-xl-4-5,.pure-u-xl-5-12,.pure-u-xl-5-24,.pure-u-xl-5-5,.pure-u-xl-5-6,.pure-u-xl-5-8,.pure-u-xl-6-24,.pure-u-xl-7-12,.pure-u-xl-7-24,.pure-u-xl-7-8,.pure-u-xl-8-24,.pure-u-xl-9-24{display:inline-block;zoom:1;letter-spacing:normal;word-spacing:normal;vertical-align:top;text-rendering:auto}.pure-u-xl-1-24{width:4.1667%}.pure-u-xl-1-12,.pure-u-xl-2-24{width:8.3333%}.pure-u-xl-1-8,.pure-u-xl-3-24{width:12.5%}.pure-u-xl-1-6,.pure-u-xl-4-24{width:16.6667%}.pure-u-xl-1-5{width:20%}.pure-u-xl-5-24{width:20.8333%}.pure-u-xl-1-4,.pure-u-xl-6-24{width:25%}.pure-u-xl-7-24{width:29.1667%}.pure-u-xl-1-3,.pure-u-xl-8-24{width:33.3333%}.pure-u-xl-3-8,.pure-u-xl-9-24{width:37.5%}.pure-u-xl-2-5{width:40%}.pure-u-xl-10-24,.pure-u-xl-5-12{width:41.6667%}.pure-u-xl-11-24{width:45.8333%}.pure-u-xl-1-2,.pure-u-xl-12-24{width:50%}.pure-u-xl-13-24{width:54.1667%}.pure-u-xl-14-24,.pure-u-xl-7-12{width:58.3333%}.pure-u-xl-3-5{width:60%}.pure-u-xl-15-24,.pure-u-xl-5-8{width:62.5%}.pure-u-xl-16-24,.pure-u-xl-2-3{width:66.6667%}.pure-u-xl-17-24{width:70.8333%}.pure-u-xl-18-24,.pure-u-xl-3-4{width:75%}.pure-u-xl-19-24{width:79.1667%}.pure-u-xl-4-5{width:80%}.pure-u-xl-20-24,.pure-u-xl-5-6{width:83.3333%}.pure-u-xl-21-24,.pure-u-xl-7-8{width:87.5%}.pure-u-xl-11-12,.pure-u-xl-22-24{width:91.6667%}.pure-u-xl-23-24{width:95.8333%}.pure-u-xl-1,.pure-u-xl-1-1,.pure-u-xl-24-24,.pure-u-xl-5-5{width:100%}}
+
+
+    body {
+      background: rgb(50,50,50);
+      color: rgb(226,226,226);
+      user-select: none;
+      display: flex;
+      min-height: 100vh;
+      flex-direction: column;
+      -webkit-user-select: none;      
+      -moz-user-select: none;
+    }
+
+    .centered {
+      text-align: center;
+    }
+
+    .button-dark {
+      background: #555;
+      color: rgb(226,226,226);
+      border: solid 1px rgb(226,226,226);
+      border-radius: 4px;      
+    }
+  
+    .site-content{
+      flex:1;
+      flex-direction: column;
+      display:flex;
+    }
+
+    .top-left {
+      position:absolute;
+      top:3px;
+      left:3px;
+    }
+  
+    .streambuffre-footer {
+      background-color:#1F8DD6;
+      padding:15px;
+      text-decoration: none;
+      color: rgb(226,226,226);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* following is the examples page */
+    #configPreviewList {
+      overflow-y: auto;
+    }
+
+    .configPreview {
+      margin-bottom:10px;
+    }
+
+    .configPreviewImg {
+      max-width:120px;
+      margin:5px;
+      max-height: 80px;
+    }
+
+    .configPreviewTitle {
+      font-size:1.5em;
+      font-weight:bold;
+    }
+
+    .exampleLink {
+      margin: 2px;
+      padding: 3px;
+    }
+
+    .configPreviewDescription {
+      text-align:justify;
+      margin:5px;
+    }
+
+    .configPreviewButtonCol {
+      display:flex;
+      flex-direction:column;
+    }
+    
+
+    /* following is the editor stuff */
+    textarea::placeholder {
+      color: darkgray;
+    }
+
+    .editor_leftpanel {
+      display:flex;
+      flex-direction:column;
+      max-width:300px;
+      padding: 2px 5px 2px 5px;
+    }    
+
+    .editor_selectionBox {
+      width: 100%;
+      background-color: #555 !important;
+      height: 2.25em;
+      border: 1px solid #ccc;
+      padding: .5em .6em;
+      display: inline-block;
+      box-shadow: inset 0 1px 3px #ddd;
+      border-radius: 4px;
+      vertical-align: middle;
+      box-sizing: border-box;
+      cursor:pointer;
+      margin-bottom:10px;
+    }
+
+    .editor_dropdownList {
+      flex:1;
+      border: solid 1px lightgray;
+      border-radius:5px;
+      background-color:#555;
+      text-align:left;
+      padding:3px;
+      max-height: 55vh;
+      overflow: auto;
+      position:absolute;
+      width: calc(100% - 8px);
+      top: 36px;
+    }
+
+    .editor_dropdownListEntry {
+      cursor:pointer;      
+      margin: 0 0 0 10px;
+    }
+
+    .editor_dropdownListEntry:hover{
+      background-color:#444;
+    }
+
+    .editor_dropdownListInfo {
+      position:absolute;
+      width:400px;
+      max-height: 75vh;
+      overflow:auto;
+      top:0px;
+      right:-410px;
+      border: solid 1px lightgray;
+      background-color:#333;
+      text-align:justify;
+      padding:3px;
+      border-radius:4px;      
+      user-select: text;
+    }
+
+    .editor_metadata_entry {
+      display:flex;
+      flex-direction:row;
+      margin-bottom:10px;
+      margin-left:5px;
+      margin-right:5px;
+    }
+
+    .editor_selectionBox.editor_metadata_removeEntry {
+      margin:0;
+      margin-left:5px;
+      font-weight:bold;
+      width: 32px;
+    }
+
+    .paramName {
+      font-weight:bold;
+    }
+
+    .paramInfo {
+      margin-top:5px;
+    } 
+
+
+    #scriptContentBox {
+      background-color:#555;
+      width:100%;
+      text-overflow: ellipsis;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    #scriptContent {
+      font-family: Consolas,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,sans-serif;
+      font-size: 13px;
+      resize: none;
+      background-color:#555;
+      width:100%;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    #consoleOutput {
+      resize: none;
+      background-color:#555;
+      width:100%;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    #consoleOutputContent {
+      resize: none;
+      background-color:#555;      
+      flex-grow:1;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    #update_notice {
+      position: absolute;
+      right: 5px;
+      top: 10px;
+      color: #53c75c;
+      font-size: 1.5em;
+      font-weight: bold;
+      text-decoration: underline;
+      cursor:pointer;
+    }
+    
+  </style>
+</head>
+<body>
+  <!-- main page -->
+  <div id="page_main" class="site-content">
+    <div style="margin-bottom:0;margin-top: 28.140px;display: flex;justify-content: center;">
+      <img height="42" src="scchrom://internal/ScChrom_logo">
+      <h1 class="centered" style="margin:0;font-size:42px;margin-left: 5px;">ScChrom</h1>
+    </div>
+    <div class="centered">
+      <label>is setup correctly</label>
+      <br>
+      <label>Things to do next:</label>
+    </div>
+
+    <a id="update_notice" data-version="" href="">
+      Checking version...
+    </a>
+
+    <div class="pure-g">
+      <div class="pure-u-1 pure-u-md-1-3 centered">
+        <h2>Get configs</h2>
+        <div id="main_configPreview" style="margin:5px;">         
+          <a href="#examples" style="margin:5px;" class="pure-button button-dark centered">Checkout example configs</a>
+        </div>
+      </div>
+      <div class="pure-u-1 pure-u-md-1-3">
+        <h2 class="centered">Learn more</h2>
+        <div class="centered">          
+          <a href="external:https://github.com/Felmachersoft/scchrom" style="margin:5px;" class="pure-button button-dark centered">Visit project page</a>
+        </div>
+      </div>
+      <div class="pure-u-1 pure-u-md-1-3 centered">
+        <h2>Create/Edit configs</h2>
+        <div class="centered">
+          <a href="#help" style="margin:5px;" class="pure-button button-dark centered">Show help</a><br />
+          <a href="#editor" style="margin:5px;" class="pure-button button-dark centered">Show editor</a>          
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- editor page -->
+  <div id="page_editor" class="site-content" style="display:none">
+
+    <div id="editor_metadata" class="close_metadataEditor" style="display:none;position:absolute;top: 0;left:0;height:100%;width:100%;backdrop-filter: blur(1px);background:rgba(1, 1, 1, 0.17);z-index:100;">
+      <div style="width:100%;height:100%;display:flex;">
+        <div class="close_metadataEditor" style="flex-grow:1;"></div>
+        <div class="close_metadataEditor" style="flex-grow:1;max-width:550px;display:flex;flex-direction:column;">
+          <div class="close_metadataEditor" style="flex-grow:1;"></div>
+          <div style="background:rgb(50, 50, 50);flex-grow:8;max-height:80%;border:2px solid rgb(226,226,226); border-radius: 5px;position:relative;padding:5px;display: flex;flex-direction: column;">
+            <h2 class="centered">Metadata</h2>
+            <div class="close_metadataEditor" style="position:absolute;top:2px;right:10px;font-size:1.5em;cursor:pointer;">✖</div>
+            <div style="flex-grow:1;overflow-y:auto;">
+              <div id="editor_metadata_list"> </div>
+              <div class="centered">
+                <div id="editor_metadataAdd" class="editor_selectionBox" style="max-width:120px;">
+                  Add entry
+                </div>
+              </div>
+            </div>
+            <div class="centered">
+              <div id="editor_metadataAccept" class="editor_selectionBox" style="max-width:120px;">
+                Ok
+              </div>
+            </div>
+          </div>
+          <div class="close_metadataEditor" style="flex-grow:1;"></div>
+        </div>
+        <div class="close_metadataEditor" style="flex-grow:1;"></div>
+      </div>
+    </div>
+
+
+    <h1 class="centered" style="margin-bottom:0;">ScChrom - Editor</h1>
+    <a href="#" class="pure-button button-dark centered top-left"><< Back</a>
+    
+    <div class="pure-g" style="flex:1;align-content: inherit;">
+      <div class="pure-u-1 pure-u-md-1-2 editor_leftpanel">
+        <div class="centered" style="flex-grow:1;display:flex;flex-direction:column;position:relative;">
+          <div>
+            <div id="editor_parameterSelect" class="editor_selectionBox">
+              Add parameter
+            </div>
+            <div id="editor_parameterList" class="editor_dropdownList" style="display:none;">
+
+            </div>
+            <div id="editor_paramInfo" class="editor_dropdownListInfo" style="display:none;">
+              <div class="paramName" style="text-align:center;"></div>
+              <div class="paramInfo" style="text-align:justify;"></div>
+              <div class="paramPossibleValues" style="text-align:left;display:none;">
+                <br />
+                <b>Possible values:</b>
+              </div>
+              <div class="paramDefault" style="text-align:left;display:none;">
+                <br />
+                <b>Default value:</b>
+              </div>
+              <div class="paramExample" style="text-align:left;display:none;">
+                <br />
+                <b>Example:</b>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div id="editor_jsControllerSelect" class="editor_selectionBox">
+              Add JsController method
+            </div>
+            <div id="editor_jsControllerList" class="editor_dropdownList" style="display:none;top: 82px;">
+              
+            </div>
+            <div id="editor_jsControllerInfo" class="editor_dropdownListInfo" style="display:none;top: 46px;">
+              <div class="methodName" style="text-align:center;font-weight:bold;"></div>
+              <div class="methodDescription" style="text-align:justify;"></div>
+              <div class="methodSignature" style="text-align:left;"></div>              
+              <div class="methodParams" style="text-align:left;"></div>
+              <div class="methodReturnvalue" style="text-align:left;"></div>
+            </div>
+          </div>
+          <div>
+            <div id="editor_editMetadata" class="editor_selectionBox">
+              Edit Metadata
+            </div>            
+          </div>
+        </div>
+
+        <div style="display:flex;justify-content:space-around;">
+          <input id="editor_openScript" type='file' accept='.sccf, .txt' style="display:none;">
+          <label id="editor_buttonOpen" class="pure-button button-dark centered" for="editor_openScript">Open</label>
+          <label id="editor_buttonSave" class="pure-button button-dark centered">Save</label>          
+        </div>
+
+      </div>
+      <div class="pure-u-1 pure-u-md-1-2" style="display:flex;flex-grow: 1;">
+        
+        <div id="scriptContentBox">
+          <div style="display:flex;margin:5px;">
+            <div style="margin:5px;flex-grow:1;">Script content:</div>
+            <div style="margin:5px;"><input id="editor_checkOutput" type="checkbox" checked/><label for="editor_checkOutput"> log output</label></div>
+            <div style="margin:5px;"><input id="editor_checkError" type="checkbox" checked/><label for="editor_checkError"> log error</label></div>
+            <label id="editor_buttonTest" class="pure-button button-dark centered" style="padding-top:2px;padding-bottom:2px;">Test script</label>
+          </div>
+          <div style="display:flex;flex-grow: 1;">
+            <textarea id="scriptContent" spellcheck="false"></textarea>
+          </div>
+        </div>
+        
+        <div id="consoleOutput" style="display:none;">
+          <div style="display:flex;margin:5px;">
+            <div style="margin:5px;flex-grow:1;">Output:</div>
+            <label id="editor_buttonShowScript" class="pure-button button-dark centered">Back to script</label>
+          </div>
+          <div style="display:flex;flex-grow: 1;">
+            <textarea id="consoleOutputContent" style="flex-grow:1;"  spellcheck="false"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- examples page -->
+  <div id="page_examples" class="site-content" style="display:none;max-height:100vh;">
+    <div>
+      <h1 class="centered" style="margin:5px;">ScChrom - examples</h1>
+      <a href="#" class="pure-button button-dark centered top-left"><< Back</a>
+    </div>
+    <div style="margin:5px;">
+      Here are a few example configs demonstrating what ScChrom is capable of and help you to create your own configs.
+    </div>
+    <div id="configPreviewList"></div>
+  </div>
+
+  <!-- help page -->
+  <div id="page_help" class="site-content" style="display:none;max-height:100vh;">
+    <div>
+      <h1 class="centered" style="margin:5px;">ScChrom - help</h1>
+      <a href="#" class="pure-button button-dark centered top-left"><< Back</a>
+    </div>
+    <div style="margin:5px;">
+      <div style="text-align:justify;">
+        Config files control the behavior of ScChrom. They usual have the filename extension <i>.sccf</i>, but every file that contains utf-8 encoded text will work.
+        The build in <a style="color:white;" href="#editor">editor</a> provides more information about the available parameters and methods provided by the JsController.
+        Make sure to check out the <a style="color:white;" href="#examples">config file examples</a>. <br />        
+      </div>
+      <div id="ParameterHelp">
+        <h2 class="centered">Parameter</h2>
+        <div>
+          Every parameter starts on a new line with -- followed by its name, a <i>=</i> and the parameters value, like:
+<pre>
+  --parameter=value
+</pre>
+          The value can span over multiple lines. It will end once a line with a new parameter occurs or the config file ends.
+          <br />
+          Some parameters support stacking. This provides a way to use the same parameter for different contexts.
+          Every stacked value is identified by their respective stack key, like:
+<pre>
+  --parameter<&zwj;stackKey1>=value1
+  --parameter<&zwj;stackKey2>=value2
+</pre>
+          In the editor all available parameters with a description, default values and other information can be viewed.
+        </div>
+      </div>    
+      <div id="jsControllerHelp">
+        <h2 class="centered">JsController</h2>
+        <div>
+          Some parameters, especially the eventhandler, allow JavaScript injection into the browsers or Jint context.
+          Additional functionallity outside of these two contexts is available via methods of the JsControllers.<br />
+          In the Jint context a method is called via the JsControllers and the specific method name like
+<pre>
+  JsController.methodName();
+  var value1 = JsController1.methodName1();
+</pre>
+          JsController methods inside the Jint context block until they are done or return a value.<br /><br />
+          JsController methods inside the browsers context are called via the injected ScChrom object and are executed asynchronously as a promise like:
+          <pre>
+  // No blocking here
+  ScChrom.JsController.methodName();
+  // if the return value is needed await can be used
+  var value1 = await ScChrom.JsController1.methodName1();
+</pre>
+        
+          <h2 class="centered">List of all parameters</h2>
+          <div>
+            This is a complete list of available parameters for configs.            
+          </div>
+          <br />
+          <div id="parameterlist">
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- bottom link -->
+  <a id="bottom_link" class="streambuffre-footer" href="external:https://streambuffre.com">
+    <image src="scchrom://internal/streambuffre_icon" height="32" style="margin-right:5px;"> Click here to check out StreamBuffRe, the perfect tool to watch and save online streams.
+  </a>
+
+
+  <script>
+  
+    var isParameterSetup = false;
+    var isJsControllerSetup = false;
+
+    var isParameterHelpSetup = false;
+    var isJsControllerHelpSetup = false;
+
+    var replaceAll = function (str, find, replace) {
+      function escapeRegExp(string) {
+        return string.replace(/[.*+\-?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+      }
+      return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
+    }
+
+    var escapeHtml = function (text) {
+      text = replaceAll(text, "&", "&amp");
+      text = replaceAll(text, "<", "&lt;");
+      return text;
+    }
+
+    var getHTMLFormatedCode = function (text) {
+      let html = '';      
+
+      // escape html
+      text = escapeHtml(text);
+
+      let lines = text.split('\r\n');           
+      
+      let spaceCount = 100000;
+      for (let j in lines) {
+        let startWithSpace = lines[j].length > 0 && lines[j].charAt(0) == ' ';
+        if(!startWithSpace)
+          continue;
+
+        let sc = 0;
+        for (let k = 0; k < lines[j].length; k++) {
+          if (lines[j].charAt(k) != ' ') {
+            sc = k;
+            break;
+          }
+        }                  
+        if (sc < spaceCount)
+          spaceCount = sc;
+      }
+      for (let j in lines) {
+        let sc = lines[j];
+        if (spaceCount < 100000 && sc.length > 0 && sc.charAt(0) == ' ') {
+          sc = sc.substring(spaceCount);                    
+          let preSpaceCount = 0;
+          for (let l = 0; l < sc.length; l++) {
+            if (sc.charAt(l) != ' ') {
+              preSpaceCount = l;
+              break;
+            }
+          }
+          sc = sc.substring(preSpaceCount);
+          for (let l = 0; l < preSpaceCount; l++) {
+            sc = '&nbsp;' + sc;
+          }                    
+        }
+        html += '<br>';
+        html += sc;
+      }
+
+      html += ''
+      return html;
+    }
+
+    var insertIntoTextInput = function(myField, myValue) {
+      // from: https://stackoverflow.com/questions/11076975/how-to-insert-text-into-the-textarea-at-the-current-cursor-position
+      if (myField.selectionStart || myField.selectionStart == '0') {
+        var startPos = myField.selectionStart;
+        var endPos = myField.selectionEnd;
+        myField.value = myField.value.substring(0, startPos)
+            + myValue
+            + myField.value.substring(endPos, myField.value.length);
+        myField.selectionStart = startPos + myValue.length;
+        myField.selectionEnd = startPos + myValue.length;
+      } else {
+        myField.value += myValue;
+      }
+    }
+
+
+    var pages = {
+      'main' : document.getElementById('page_main'),
+      'editor': document.getElementById('page_editor'),
+      'examples': document.getElementById('page_examples'),
+      'help': document.getElementById('page_help'),
+    }    
+
+    var parameters = false;
+    var jsControllerInfo = false;
+    var exampleScripts = false;
+    var configCache = {}
+
+    var showPage = function(pagename) {
+      if (pagename == '') {
+        pagename = 'main';
+      }
+      
+      // custom page stuff
+      if (pagename == 'main')
+        document.getElementById('bottom_link').style.display = '';
+      else
+        document.getElementById('bottom_link').style.display = 'none';
+      
+      if (pagename == 'examples') {
+        loadExampleConfigs();
+      }
+
+      if (pagename == 'editor') {
+        getParameters(setupParameterSelection);
+        getJsController(setupJsControllerSelection);
+      }
+
+      if (pagename == 'help') {
+        getParameters(setupParameterHelp);
+        getJsController(setupJsControllerHelp);               
+      }
+
+      // hide all pages but the selected one
+      for (var p in pages) {
+        var page = pages[p];
+        if (p != pagename) {
+          page.style.display = "none";
+        } else {
+          page.style.display = "flex";
+        }
+      }
+    }
+
+    var handleHashChange = function(hash) {
+      let pagename = hash.substr(1);
+      let parameters = false;
+      if (pagename.includes("?")) {
+        let parts = pagename.split("?", 2);
+        if (parts.length > 1) {
+          pagename = parts[0];
+        }
+      }
+
+      showPage(pagename);
+    }
+
+    
+
+    var setupListener = function () {
+
+      window.onhashchange = function () {
+        handleHashChange(location.hash);
+      };
+
+      document.getElementById('editor_parameterSelect').addEventListener("click", showParameterlist);         
+      document.getElementById('editor_paramInfo').addEventListener("click", 
+        function (event) {
+          // open new browser for external links
+          if (event.target.href && event.target.href.startsWith('external:'))
+            document.location.href = event.target.href;
+                    
+          event.preventDefault();
+          event.stopPropagation();
+        }
+      );
+      
+      document.getElementById('editor_jsControllerSelect').addEventListener("click", showjsControllerlist);
+      document.getElementById('editor_jsControllerInfo').addEventListener("click",        
+        function (event) {
+          // open new browser for external links
+          if (event.target.href && event.target.href.startsWith('external:'))
+            document.location.href = event.target.href;
+
+          event.preventDefault();
+          event.stopPropagation();
+        }
+      );
+            
+      document.getElementById('editor_editMetadata').addEventListener("click", showMetadataEditor);
+      document.getElementById('editor_metadata').addEventListener("click", handleMetadataEditorClick);
+
+      document.getElementById('editor_openScript').addEventListener('change',
+        function (event) {
+          var input = event.target;
+
+          var reader = new FileReader();
+          reader.onload = function () {
+            var text = reader.result;
+            var node = document.getElementById('scriptContent');
+            node.value = text;
+          };
+          reader.readAsText(input.files[0]);          
+        }
+      )
+
+      document.getElementById('editor_buttonSave').addEventListener('click', showSaveScriptDialog);
+
+      document.getElementById('editor_buttonTest').addEventListener('click', testScript);
+      
+      document.getElementById('editor_buttonShowScript').addEventListener('click', showScriptContent);
+      
+      document.getElementById('scriptContent').addEventListener('keydown', (e) => {
+        if(e.keyCode==9 || e.which==9){
+          e.preventDefault();
+          let ta = e.currentTarget;
+          var s = ta.selectionStart;
+          ta.value = ta.value.substring(0,ta.selectionStart) + "  " + ta.value.substring(ta.selectionEnd);
+          ta.selectionEnd = s+2; 
+        }          
+      });
+     
+
+      
+
+      document.addEventListener('click', function (event) {        
+        if (!event.target.matches('.exampleLink'))
+          return;
+
+        event.preventDefault();
+        let action = event.target.getAttribute('data-action');
+        let url = event.target.href;
+        let scriptName = event.target.getAttribute('data-name');
+
+        if (configCache[url]) {
+          executeExampleAction(action, scriptName, url);
+        } else {
+          fetch(url).then(response => {
+            if (response.ok) 
+              return response.text();
+            alert("Error while receiving the config-file, try again later.");                                    
+          }).then(configContent => {
+            let text = configContent;
+            configCache[url] = text;
+            executeExampleAction(action, scriptName, url);
+          });
+        }
+      });
+
+    };
+
+    var executeExampleAction = function (action, scriptName, url) {
+      let scriptContent = configCache[url];
+      switch (action) {
+        case 'start':
+          ScChrom.ExecutableController.startNewScChrom(scriptContent, '', '', '');
+          break;
+        case 'download':
+          showSaveScriptDialog(scriptName,scriptContent);
+          break;
+        case 'edit':
+          var node = document.getElementById('scriptContent');
+          node.value = scriptContent;
+          window.location = '#editor';
+          break;
+      }
+    }
+
+    var loadExampleConfigs = function () {
+      let exampleListElem = document.getElementById('configPreviewList');
+
+      if (exampleScripts) {
+        showExamples();
+        return;
+      }
+
+      fetch('https://raw.githubusercontent.com/Felmachersoft/ScChrom_examples/master/overview.json')
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (result) {
+        exampleScripts = result;        
+        showExamples();
+      });
+    }
+
+    var showExamples = function(){
+      let html = '';
+      let incompatibleCount = 0;
+      let curVersion = getCurrentVersion();
+      for(let res of exampleScripts) {        
+
+        if (isNewerVersion(curVersion, res.minVersion)) {
+          incompatibleCount++;
+          continue;
+        }
+
+
+        let imageElemString = '';
+        if(res.previewImageUrl){
+          imageElemString = `
+            <img class ="configPreviewImg" src="${escapeHtml(res.previewImageUrl)}">
+          `;
+        } else {
+          imageElemString = `
+            <img class ="configPreviewImg"  style="width:120px; height:80px;object-fit: contain;" src="scchrom://internal/ScChrom_logo">
+          `;
+        }
+
+        let part = `
+          <div class ="configPreview">
+            <div style="display:flex;">
+              <div>${imageElemString}</div>
+              <div style="flex-grow:1;">
+                <div class="configPreviewTitle">${res.title ? escapeHtml(res.title) : ''}</div>
+                <div class ="configPreviewDescription">${res.description ? escapeHtml(res.description) : ''}</div>
+              </div>
+              <div class="configPreviewButtonCol">
+                <a href="${res.rawConfigUrl ? escapeHtml(res.rawConfigUrl) : ''}" class ="pure-button button-dark centered exampleLink" data-action="start"    data-name="${res.title ? escapeHtml(res.title) : ''}">Start</a>
+                <a href="${res.rawConfigUrl ? escapeHtml(res.rawConfigUrl) : ''}" class ="pure-button button-dark centered exampleLink" data-action="download" data-name="${res.title ? escapeHtml(res.title) : ''}">Download</a>
+                <a href="${res.rawConfigUrl ? escapeHtml(res.rawConfigUrl) : ''}" class ="pure-button button-dark centered exampleLink" data-action="edit"     data-name="${res.title ? escapeHtml(res.title) : ''}">Open in editor</a>
+              </div>
+            </div>
+          </div>
+        `;
+
+        html += part;
+      }
+
+      if (incompatibleCount > 0)
+        html = '<label style="color:red;font-weight: bold;margin:5px;">' + incompatibleCount + ' configs are not shown because they require a newer ScChrom version.</label><br>' + html;
+      
+      document.getElementById('configPreviewList').innerHTML = html;
+    }
+
+    var closeEditorDropdownList = function (event) {
+      let elem = document.getElementById('editor_parameterList');
+      elem.style.display = 'none';
+      let infoParamElem = document.getElementById('editor_paramInfo');
+      infoParamElem.style.display = 'none';
+      
+      let jsControllerElem = document.getElementById('editor_jsControllerList');
+      jsControllerElem.style.display = 'none';
+      let infoJsControllerElem = document.getElementById('editor_jsControllerInfo');
+      infoJsControllerElem.style.display = 'none';
+      
+      if (!event)
+        return;
+
+      if (!event.target)
+        return;
+
+      if (!event.target.classList.contains('editor_dropdownListEntry'))
+        return;
+      
+
+      let addedText = '';
+      let scriptElem = document.getElementById('scriptContent');
+
+      if ("parameter" in event.target.dataset) {
+       
+        let selectedParamName = event.target.dataset['parameter'];
+        curParam = parameters[selectedParamName];              
+      
+        if (scriptElem.value.length > 0)
+          addedText += '\r\n';
+        addedText += '--' + curParam.Name + "=";
+        if (curParam.DefaultValue) {
+          let tempDefVal = curParam.DefaultValue;
+
+          if (curParam.ParamTypeName == 'IdAndText' || curParam.ParamTypeName == 'IdAndJavascript' || curParam.ParamTypeName == 'Text') {
+            tempDefVal = replaceAll(tempDefVal, "\\n", "\n");
+          }
+
+          addedText += tempDefVal;
+        } else {
+          if (curParam.Stackable) {
+            // replace = with a reminder for own id
+            addedText = addedText.substring(0, addedText.length - 1);
+            addedText += "<VALUE>=";
+          }
+        }
+        scriptElem.value += addedText;
+        scriptElem.scrollTop = scriptElem.scrollHeight;
+      }
+      if ("jsController" in event.target.dataset) {
+       
+        let parts = event.target.dataset['jsController'].split(".");
+        let controllerName = parts[0];
+        let methodName = parts[1];
+        let method = false;
+        for(let mi of jsControllerInfo[controllerName].MethodInfos) {
+          if (mi.Methodname == methodName) {
+            method = mi;
+            break;
+          }
+        }
+        if (!method)
+          return;
+        addedText = controllerName + '.' + methodName + '(';
+        for(let param of method.Parameters){
+          if(param.IsNecessary)
+            addedText += param.Parametername + ',';
+          else
+            addedText += '[' + param.Parametername + '],';
+        }
+        if(method.Parameters.length > 0){
+          addedText = addedText.slice(0, -1);
+        }
+        addedText += ')';
+
+        insertIntoTextInput(scriptElem, addedText);
+      }
+      
+      scriptElem.focus();
+    }
+    
+    var showParameterlist = function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      let elem = document.getElementById('editor_parameterList');
+      elem.style.display = '';
+    }
+
+    var showjsControllerlist = function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      let elem = document.getElementById('editor_jsControllerList');
+      elem.style.display = '';
+    }
+
+    var showMetadataEditor = function (event) {
+      let elem = document.getElementById('editor_metadata');
+      let listElem = document.getElementById('editor_metadata_list');
+
+      listElem.innerHTML = '';
+      elem.style.display = '';
+
+      var lines = document.getElementById('scriptContent').value.split('\n');
+      if (lines.length > 0) {
+        var firstLine = lines[0];
+
+        var curData = getMetadata(firstLine);
+        
+        if (curData) {          
+          for (let entry in curData) {
+            addMetaDataEntry(listElem, entry, curData[entry]);
+          }
+        }
+      }
+    }
+
+    var addMetaDataEntry = function(listElem, k,v){
+      let template = `
+        <div class="editor_metadata_entry pure-form">
+          <input type="text" class="editor_metadata_key" style="background-color: #555;flex-grow:1;" placeholder="Key" />
+          <label style="margin-left:5px;margin-right:5px;">:</label>
+          <input type="text" class="editor_metadata_value" style="background-color: #555;flex-grow:1;" placeholder="Value" />
+          <label class="editor_selectionBox editor_metadata_removeEntry centered">-</label>
+        </div>
+      `;
+
+      var div = document.createElement('div');
+      div.innerHTML = template;
+      div.getElementsByClassName('editor_metadata_key')[0].value = k;
+      div.getElementsByClassName('editor_metadata_value')[0].value = v;
+      listElem.appendChild(div);
+    }
+
+    var getMetaDataFromEntries = function(){
+      let ret = {};
+
+      let listElem = document.getElementById('editor_metadata_list');
+      let entryElems = listElem.getElementsByClassName('editor_metadata_entry');
+      for(let entryElem of entryElems){
+        let key = entryElem.getElementsByClassName('editor_metadata_key')[0].value;
+        let val = entryElem.getElementsByClassName('editor_metadata_value')[0].value;
+        if(key == '')
+          continue
+        ret[key] = val;
+      }
+      return ret;
+    }
+
+    var setMetadata = function(md){
+      let json = JSON.stringify(md);
+      let mdLine = '//' + json;
+
+      let newContent = '';
+      var lines = document.getElementById('scriptContent').value.split('\n');
+            
+      if (lines.length > 0) {
+        var curData = getMetadata(lines[0]);
+
+        if (curData) {
+          // override old metadata
+          newContent = mdLine;
+        } else {
+          // prepend new metadata
+          newContent = mdLine + '\n';
+          newContent += lines[0];
+        }
+        for(let i = 1; i < lines.length; i++)
+          newContent += '\n' + lines[i];
+      }
+
+      document.getElementById('scriptContent').value = newContent;
+    }
+
+    var handleMetadataEditorClick = function (event) {
+
+      if (event.target.classList.contains('close_metadataEditor')){
+        let elem = document.getElementById('editor_metadata');
+        elem.style.display = 'none';
+        return;      
+      }
+      
+      if (event.target.id == 'editor_metadataAdd'){
+        addMetaDataEntry(document.getElementById('editor_metadata_list'), '','');
+        return;      
+      }
+
+      if (event.target.classList.contains('editor_metadata_removeEntry')){
+        let listElem = event.target.parentNode.parentNode;
+        let rowElem = event.target.parentNode;
+        listElem.removeChild(rowElem);
+        return;      
+      }
+      
+      if (event.target.id == 'editor_metadataAccept'){
+
+        let md = getMetaDataFromEntries();
+        setMetadata(md);
+
+        let elem = document.getElementById('editor_metadata');
+        elem.style.display = 'none';
+        return;      
+      }
+      
+    }
+    
+    var getMetadata = function(content){
+      if (!content.startsWith('//{'))
+        return false;
+      let json = content.substring(2);
+      try {
+        return JSON.parse(json);
+      } catch (e) {
+        return false;
+      }
+    }
+
+    var showSaveScriptDialog = function (scriptName, scriptContent) {
+      if (typeof scriptName !== 'string'){
+        scriptName = "MyScript.sccf";
+      }
+      if (typeof scriptContent !== 'string'){
+        scriptContent = document.getElementById('scriptContent').value;
+      }
+
+      var textToWrite = scriptContent;
+      var textFileAsBlob = new Blob([textToWrite], { type: 'text/plain' });
+      var fileNameToSaveAs = scriptName;
+
+      var downloadLink = document.createElement("a");
+      downloadLink.download = fileNameToSaveAs;
+      downloadLink.innerHTML = "Download File";
+      downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+
+      downloadLink.click();
+    }
+
+    var testScript = function () {
+            
+      let consoleOutputElem = document.getElementById('consoleOutput');
+      let consoleOutputContentElem = document.getElementById('consoleOutputContent');
+      let scriptElem = document.getElementById('scriptContentBox');
+      let testBtnElem = document.getElementById('editor_buttonTest');
+      let scriptContentElem = document.getElementById('scriptContent');
+      let checkOutputElem = document.getElementById('editor_checkOutput');
+      let checkErrorElem = document.getElementById('editor_checkError');
+
+      let scriptContent = scriptContentElem.value;
+
+      consoleOutputContentElem.value = "";
+      consoleOutputElem.style.display = "";
+      scriptElem.style.display = "none";
+      testBtnElem.style.display = "none";
+      
+      checkOutputElem.disabled = true
+      checkErrorElem.disabled = true
+      
+      let exit_callback_id = 'exit_callback_id';
+      let stdout_callback_id = 'stdout_callback_id';
+      let errout_callback_id = 'errout_callback_id';
+
+      let logOutput = checkOutputElem.checked;
+      let logError = checkErrorElem.checked;
+
+      ScChrom.addCallback(exit_callback_id, function (exitcode) {
+        checkOutputElem.disabled = false
+        checkErrorElem.disabled = false
+        console.log("Test program closed with code: " + exitcode);        
+      });
+      
+      ScChrom.addCallback(stdout_callback_id, function (value) {
+        if (!logOutput) return;
+        //console.log(value);
+        consoleOutputContentElem.value += value + "\n";
+        consoleOutputContentElem.scrollTop = consoleOutputContentElem.scrollHeight;
+      });
+      ScChrom.addCallback(errout_callback_id, function (value) {
+        if (!logError) return;
+        //console.error(value);
+        consoleOutputContentElem.value += value + "\n";
+        consoleOutputContentElem.scrollTop = consoleOutputContentElem.scrollHeight;
+      });
+      ScChrom.ExecutableController.startNewScChrom(scriptContent, exit_callback_id, stdout_callback_id, errout_callback_id);
+    }
+
+    var showScriptContent = function () {
+      let consoleOutputElem = document.getElementById('consoleOutput');
+      let scriptElem = document.getElementById('scriptContentBox');
+      let testBtnElem = document.getElementById('editor_buttonTest');
+      consoleOutputElem.value = "none";
+      consoleOutputElem.style.display = "none";
+      scriptElem.style.display = "";
+      testBtnElem.style.display = "";
+    }
+
+    var getParameters = function (callback) {      
+      if (parameters) {
+        callback();
+      } else {
+        fetch('scchrom://internal/getparameters')
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (json) {
+          parameters = {};
+          for (var i in json) {
+            let kv = json[i];
+            parameters[kv.Key] = kv.Value;
+          }
+          getParameters(callback);
+        });
+      }
+    }
+
+    var getJsController = function (callback) {
+      if (jsControllerInfo) {
+        callback();
+      }
+      if (!jsControllerInfo) {
+        fetch('scchrom://internal/getjscontroller')
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (json) {
+
+          jsControllerInfo = {};
+          // sort alphabetically
+          Object.keys(json)
+          .sort()
+          .forEach(function (k, i) {
+            jsControllerInfo[k] = json[k];
+          });
+
+          getJsController(callback);
+        });
+      }
+    }
+
+    var setupParameterSelection = function () {
+
+      if(isParameterSetup)
+        return;
+      isParameterSetup = true;      
+
+      document.addEventListener("click", closeEditorDropdownList);           
+      
+      let groupedParams = {};
+      for (var k in parameters) {
+        let param = parameters[k];
+
+        //if (selectedParameters.includes(param.Name))
+        //  continue;
+
+        if (!groupedParams[param.CategoryName])
+          groupedParams[param.CategoryName] = [];
+        groupedParams[param.CategoryName].push(param);
+      }
+
+      
+      let selEl = document.getElementById('editor_parameterList');
+
+      // remove old options
+      selEl.innerHTML = '';
+
+      // add categories and parameters
+      for (let k in groupedParams) {
+        let groupName = document.createElement('div');
+        groupName.innerText = k;
+        groupName.style = "font-weight:bold;";
+        selEl.appendChild(groupName);
+
+        for (let i in groupedParams[k]) {
+          let parameter = groupedParams[k][i];
+          let paramEl = document.createElement('div');
+          paramEl.innerText = parameter.Name;
+          paramEl.value = parameter.Name;
+          paramEl.classList.add('editor_dropdownListEntry');
+          paramEl.dataset['parameter'] = parameter.Name;
+          selEl.appendChild(paramEl);
+        }
+      }
+
+      // add eventlistener to show info      
+      selEl.addEventListener("mouseover", function (event) {
+        
+        if (!event.target.classList.contains('editor_dropdownListEntry'))
+          return;
+
+        let paramName = event.target.dataset['parameter'];
+        let param = parameters[paramName];
+        
+        
+        let infoElem = document.getElementById('editor_paramInfo');        
+        infoElem.style.display = '';
+              
+        for (let i in infoElem.childNodes) {
+          let curChild = infoElem.childNodes[i];
+          if (!curChild.classList)
+            continue;
+          if (curChild.classList.contains('paramName')) {
+            curChild.innerText = param.Name;            
+          }
+          if (curChild.classList.contains('paramInfo')) {
+            curChild.innerHTML = param.Information;
+          }
+          
+         
+          if (curChild.classList.contains('paramPossibleValues')) {
+            let html = '';
+            if (param.EnumerationValues && param.EnumerationValues.length > 0) {
+              curChild.style.display = '';
+              html = '<br /><b>Possible values:</b> <ul>';
+              for (let j in param.EnumerationValues) {
+                html += '<li>';
+                let curVal = param.EnumerationValues[j];
+                html += '<b>' + curVal.Value + ':</b> ';
+                html += curVal.Description;
+                html += '</li>';
+              }
+              html += '</ul>';
+            } else
+              curChild.style.display = 'none';
+
+            curChild.innerHTML = html;
+          }
+          if (curChild.classList.contains('paramDefault')) {
+            let html = '';
+            if (param.DefaultValue) {
+              curChild.style.display = '';
+              html = '<br /><b>Default:</b> ';
+              if (param.ParamTypeName == 'IdAndText' || param.ParamTypeName == 'Text' || param.ParamTypeName == 'IdAndJavascript') {
+                let temp = replaceAll(param.DefaultValue, "<", "&lt;");
+                temp = replaceAll(temp, "\\n", "<br>");
+                html += temp;
+              } else {
+                html += param.DefaultValue;
+              }
+              
+            } else
+              curChild.style.display = 'none';
+
+            curChild.innerHTML = html;
+          }
+          if (curChild.classList.contains('paramExample')) {
+            let html = '';
+            if (param.Examples) {
+              curChild.style.display = '';              
+              for (let i in param.Examples) {
+                let curExample = param.Examples[i];
+                html += '<br /><b>Example';
+                if (param.Examples.length > 1)
+                  html += " " + (parseInt(i) + 1);
+                html += ':</b><br>';
+                html += curExample.Description;
+                html += '<br>';
+                html += getHTMLFormatedCode(curExample.Content);
+                html += '<br>';
+              }
+            } else
+              curChild.style.display = 'none';
+            curChild.innerHTML = html;            
+          }        
+        }                
+      });
+    };
+
+    var setupJsControllerSelection = function () {
+     
+      if(isJsControllerSetup)
+        return;
+      isJsControllerSetup = true;
+
+      let selEl = document.getElementById('editor_jsControllerList');
+
+      // remove old options
+      selEl.innerHTML = '';
+
+      // add jsController
+      for (let k in jsControllerInfo) {
+        let jsCName = document.createElement('div');
+        jsCName.innerText = k;
+        jsCName.style = "font-weight:bold;";
+        selEl.appendChild(jsCName);
+
+        for (let method of jsControllerInfo[k].MethodInfos) {          
+          let methodEl = document.createElement('div');
+          methodEl.innerText = method.Methodname;
+          methodEl.value = method.Methodname;
+          methodEl.classList.add('editor_dropdownListEntry');
+          methodEl.dataset['jsController'] = k + '.' + method.Methodname;
+          selEl.appendChild(methodEl);
+        }
+      }
+
+      // add eventlistener to show info
+      selEl.addEventListener("mouseover", function (event) {
+
+        if (!event.target.classList.contains('editor_dropdownListEntry'))
+          return;
+
+        let parts = event.target.dataset['jsController'].split(".");
+        let controllerName = parts[0];
+        let methodName = parts[1];
+        let method = false;
+        for(let mi of jsControllerInfo[controllerName].MethodInfos) {
+          if (mi.Methodname == methodName) {
+            method = mi;
+            break;
+          }
+
+        }
+        if (!method)
+          return;
+
+
+        let infoElem = document.getElementById('editor_jsControllerInfo');
+        infoElem.style.display = '';
+
+        for (let i in infoElem.childNodes) {
+          let curChild = infoElem.childNodes[i];
+          if (!curChild.classList)
+            continue;
+          if (curChild.classList.contains('methodName')) {
+            curChild.innerText = method.Methodname;
+            continue;
+          }
+          if (curChild.classList.contains('methodDescription')) {
+            curChild.innerHTML = method.Description;
+            continue;
+          }
+          if (curChild.classList.contains('methodSignature')) {
+            let mSignature = method.Methodname + '(';
+            if (method.Parameters.length > 0) {
+              for(let mParam of method.Parameters) {
+                let newline = '\n  <b>';
+                let pName = mParam.Parametername;
+                if(!mParam.IsNecessary){
+                  newline += '[';
+                  pName += ']';
+                }
+                
+                mSignature += newline + pName + '</b> : ' + mParam.DataType + ',';
+              }
+              mSignature = mSignature.slice(0, -1);
+              mSignature += '\n';
+            }
+            mSignature += ')';
+            if(method.ReturnValue){
+              mSignature += ' : ' + method.ReturnValue.DataType;
+            }
+            curChild.innerHTML = '<pre>' + mSignature + '</pre>';
+            continue;
+          }
+          if (curChild.classList.contains('methodParams')) {
+            if(method.Parameters.length <= 0){
+              curChild.innerHTML = '';
+              continue;
+            }
+            let parameterText = '';
+            for(let param of method.Parameters){
+              if(!param.Description)
+                continue;
+              parameterText += '<b>' + param.Parametername + '</b>: ' + param.Description + '<br>';
+            }
+            curChild.innerHTML = parameterText;
+            continue;
+          }
+          if (curChild.classList.contains('methodReturnvalue')) {
+            if (!method.ReturnValue || !method.ReturnValue.Description){
+              curChild.innerHTML = '';
+              continue;
+            }
+            let returnValue = '<b>Returns</b>: ' + method.ReturnValue.Description;
+            curChild.innerHTML = returnValue + '<br>';
+            continue;
+          }                   
+        }
+      });
+    };
+    
+    var setupParameterHelp = function () {
+      if (isParameterHelpSetup)
+        return;
+      isParameterHelpSetup = true;
+      
+      let html = '';
+
+      for (let k in parameters) {
+        let p = parameters[k];
+
+
+        let paramTemplate = `
+          <div style="margin-bottom:10px;">
+            <h3 style="margin:0;">${p.Name}</h3>
+            <div style="margin-left:15px;">
+              ${p.Information}
+            </div>
+          </div>
+        `;
+
+
+        html += paramTemplate;
+      }
+
+      let paramlistElem = document.getElementById('parameterlist');
+      paramlistElem.innerHTML = html;
+      
+    }
+
+    var setupJsControllerHelp = function () {
+      if (isJsControllerHelpSetup)
+        return;
+      isJsControllerHelpSetup = true;
+    }
+
+    var isNewerVersion = function (curVer, onlVer) {
+      let cvStrings = curVer.split('.');
+      let ovStrings = onlVer.split('.');
+
+      for (let i = 0; i < ovStrings.length; i++) {
+        let oVNr = parseInt(ovStrings[i]);
+        let cVNr = 0;
+        if (cvStrings.length > i)          
+          cVNr = parseInt(cvStrings[i]);
+
+        if (oVNr > cVNr)
+          return true;
+      }
+    
+      return false;
+    }
+
+    var getCurrentVersion = function(){
+      let updateElem = document.getElementById('update_notice');
+      return updateElem.getAttribute('data-version');
+    }
+
+    var checkForUpdates = function (repo, curVersion) {
+      
+      let updateElem = document.getElementById('update_notice');
+
+      // prevent double checking
+      if (getCurrentVersion() != '')
+        return;
+
+      document.title = 'ScChrom - ver.' + curVersion;
+      updateElem.setAttribute('data-version', curVersion);
+
+      fetch('https://api.github.com/repos/' + repo + '/releases/latest')
+        .then(response => response.json())
+        .then((data) => {                      
+          
+          if (!data.name) {
+            updateElem.style.display = 'none';
+            return;
+          }
+          
+          let newVersion = data.name;
+
+          if (isNewerVersion(curVersion, newVersion)) {
+            updateElem.innerText = "Get new version";
+            updateElem.href = "external:https://github.com/" + repo + "/releases";
+          } else {
+            update_notice.style.display = 'none';
+          }
+          
+        }
+      );
+    }
+
+    setupListener();
+
+    handleHashChange(location.hash);    
+    
+  </script>
+</body>
+</html>

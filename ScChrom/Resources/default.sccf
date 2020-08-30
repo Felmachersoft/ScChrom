@@ -1,0 +1,15 @@
+//{"author":"Felmachersoft","license":"MIT","description":"ScChroms default startup config"}
+
+--browser-js-allow_objects=ExecutableController
+--background-color=0xFF323232
+--url=scchrom://internal/startup
+--exchange-response-utf8_script<scchrom://internal/getparameters>=
+  return ArgumentsController.getArgumentHelpJson();
+--exchange-response-utf8_script<scchrom://internal/getjscontroller>=
+  return ArgumentsController.getJsControllerHelp();
+--ignore-crossorigin-from-files=true
+--allow-external-links=true
+--allow-file_resource=true
+--injected-javascript=
+  checkForUpdates('Felmachersoft/ScChrom', ScChrom.version);
+  

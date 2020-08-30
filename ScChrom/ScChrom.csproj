@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\CefSharp.WinForms.83.4.20\build\CefSharp.WinForms.props" Condition="Exists('..\packages\CefSharp.WinForms.83.4.20\build\CefSharp.WinForms.props')" />
+  <Import Project="..\packages\CefSharp.Common.83.4.20\build\CefSharp.Common.props" Condition="Exists('..\packages\CefSharp.Common.83.4.20\build\CefSharp.Common.props')" />
+  <Import Project="..\packages\cef.redist.x86.83.4.2\build\cef.redist.x86.props" Condition="Exists('..\packages\cef.redist.x86.83.4.2\build\cef.redist.x86.props')" />
+  <Import Project="..\packages\cef.redist.x64.83.4.2\build\cef.redist.x64.props" Condition="Exists('..\packages\cef.redist.x64.83.4.2\build\cef.redist.x64.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C043FFF7-5F71-4FFC-989A-E09E18548589}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ScChrom</RootNamespace>
+    <AssemblyName>ScChrom</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>..\bin\x64\Debug\</OutputPath>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <OutputPath>..\bin\x64\Release\</OutputPath>
+    <Prefer32Bit>false</Prefer32Bit>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <ApplicationIcon>Resources\ScChrom_icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <OutputPath>..\bin\Debug\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Esprima, Version=1.0.1251.0, Culture=neutral, PublicKeyToken=2e92ba9c8d81157f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Esprima.1.0.1251\lib\net45\Esprima.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Jint, Version=0.0.0.0, Culture=neutral, PublicKeyToken=2e92ba9c8d81157f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Jint.3.0.0-beta-1632\lib\net45\Jint.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BrowserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BrowserForm.Designer.cs">
+      <DependentUpon>BrowserForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BrowserJs\BrowserJsController.cs" />
+    <Compile Include="BrowserJs\IBrowserContextCallable.cs" />
+    <Compile Include="BrowserJs\ScChromBaseJsController.cs" />
+    <Compile Include="ConfigParams\ConfigParamFactory.cs" />
+    <Compile Include="CustomResourceRequestHandlers\OutputResponse_Manipulate.cs" />
+    <Compile Include="Handler\ContextMenuHandler.cs" />
+    <Compile Include="Handler\DownloadHandler.cs" />
+    <Compile Include="Filter\ContentManipulationFilter.cs" />
+    <Compile Include="Handler\DragHandler.cs" />
+    <Compile Include="Handler\KeyboardHandler.cs" />
+    <Compile Include="JsController\ExecutableController.cs" />
+    <Compile Include="JsController\FilesystemController.cs" />
+    <Compile Include="JsController\JsControllerInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Handler\SchemeHandlerFactory.cs" />
+    <Compile Include="View\ChromeWidgetMessageInterceptor.cs" />
+    <Compile Include="View\ViewTools.cs" />
+    <Compile Include="CustomResourceRequestHandlers\OutputResponse_ScriptedEvent.cs" />
+    <Compile Include="Handler\CustomRequestHandler.cs" />
+    <Compile Include="Handler\CustomResourceRequestHandlerFactory.cs" />
+    <Compile Include="Filter\StreamResponseFilter.cs" />
+    <Compile Include="JsController\ArgumentsController.cs" />
+    <Compile Include="JsController\InputController.cs" />
+    <Compile Include="JsController\BrowserController.cs" />
+    <Compile Include="JsController\IJintContextCallable.cs" />
+    <Compile Include="JsController\MediaRecordingController.cs" />
+    <Compile Include="JsController\NotificationController.cs" />
+    <Compile Include="JsController\WindowController.cs" />
+    <Compile Include="Handler\JsDialogHandler.cs" />
+    <Compile Include="libs\AnimatedGif\AnimatedGif.cs" />
+    <Compile Include="libs\AnimatedGif\AnimatedGifCreator.cs" />
+    <Compile Include="libs\AnimatedGif\Extensions.cs" />
+    <Compile Include="libs\AnimatedGif\GifClass.cs" />
+    <Compile Include="libs\AnimatedGif\GifProperties.cs" />
+    <Compile Include="libs\AnimatedGif\GrayscaleQuantizer.cs" />
+    <Compile Include="libs\AnimatedGif\Helper.cs" />
+    <Compile Include="libs\AnimatedGif\OctreeQuantizer.cs" />
+    <Compile Include="libs\AnimatedGif\PaletteQuantizer.cs" />
+    <Compile Include="libs\AnimatedGif\Quantizer.cs" />
+    <Compile Include="libs\AnimatedGif\VideoEncoder.cs" />
+    <Compile Include="Handler\LifespanHandler.cs" />
+    <Compile Include="Program.cs">
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="MainController.cs" />
+    <Compile Include="RequestIdentifier.cs" />
+    <Compile Include="Tools\Arguments.cs" />
+    <Compile Include="Tools\Common.cs" />
+    <Compile Include="Tools\JSEngine.cs" />
+    <Compile Include="Tools\Logger.cs" />
+    <Compile Include="Tools\ScreenCapture.cs" />
+    <Compile Include="View\MissingDependenciesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MissingDependenciesForm.Designer.cs">
+      <DependentUpon>MissingDependenciesForm.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BrowserForm.resx">
+      <DependentUpon>BrowserForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MissingDependenciesForm.resx">
+      <DependentUpon>MissingDependenciesForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Resources\msvcp140_64" />
+    <None Include="Resources\nav_left_green.png" />
+    <None Include="Resources\vcruntime140_64" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\nav_plain_green.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\nav_plain_red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\nav_right_green.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ScChrom_icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\default.sccf" />
+    <None Include="Resources\ScChrom.svg" />
+    <None Include="Resources\ScChrom64.png" />
+    <Content Include="Resources\streambuffre_icon.png" />
+    <None Include="Resources\menu.png" />
+    <Content Include="Resources\startup.html" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Dieses Projekt verweist auf mindestens ein NuGet-Paket, das auf diesem Computer fehlt. Verwenden Sie die Wiederherstellung von NuGet-Paketen, um die fehlenden Dateien herunterzuladen. Weitere Informationen finden Sie unter "http://go.microsoft.com/fwlink/?LinkID=322105". Die fehlende Datei ist "{0}".</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\cef.redist.x64.83.4.2\build\cef.redist.x64.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x64.83.4.2\build\cef.redist.x64.props'))" />
+    <Error Condition="!Exists('..\packages\cef.redist.x86.83.4.2\build\cef.redist.x86.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x86.83.4.2\build\cef.redist.x86.props'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.Common.83.4.20\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.83.4.20\build\CefSharp.Common.props'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.Common.83.4.20\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.83.4.20\build\CefSharp.Common.targets'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.WinForms.83.4.20\build\CefSharp.WinForms.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.WinForms.83.4.20\build\CefSharp.WinForms.props'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.WinForms.83.4.20\build\CefSharp.WinForms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.WinForms.83.4.20\build\CefSharp.WinForms.targets'))" />
+  </Target>
+  <Import Project="..\packages\CefSharp.Common.83.4.20\build\CefSharp.Common.targets" Condition="Exists('..\packages\CefSharp.Common.83.4.20\build\CefSharp.Common.targets')" />
+  <Import Project="..\packages\CefSharp.WinForms.83.4.20\build\CefSharp.WinForms.targets" Condition="Exists('..\packages\CefSharp.WinForms.83.4.20\build\CefSharp.WinForms.targets')" />
+</Project>
