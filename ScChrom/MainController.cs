@@ -229,6 +229,9 @@ namespace ScChrom {
 
                         Logger.Log("Applying following proxy settings: Ip: " + proxy_ip + " Port: " + proxy_port + " username: " + proxy_username + " ignorelist: " + proxy_ignoreList, Logger.LogLevel.debug);
                         CefSharpSettings.Proxy = new ProxyOptions(proxy_ip, proxy_password, proxy_username, proxy_password, proxy_ignoreList);
+
+                        // The previous setting alone might not work, so also add it to the command line arguments
+                        settings.CefCommandLineArgs.Add("proxy-server", proxy_ip + ":" + proxy_port);
                     } else {
                         Logger.Log("Ignored invalid value parameter proxy-settings", Logger.LogLevel.info);
                     }

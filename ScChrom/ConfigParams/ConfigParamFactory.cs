@@ -163,21 +163,27 @@ namespace ScChrom.ConfigParams {
                     { "proxy-settings", new ConfigParameter() {
                         Name = "proxy-settings",
                         Information = @"Set proxy settings for CEF. The value contains the Ip, Port, username, password, ignorelist for the proxy separated by <b>|</b>.
+                            Setting name and password might not work. In this case use a proxy forwarder that injects the name and password for you (search for proxy-login-automator).<br>
+                            In order to specify a protocol (one of http (default), socks, socks4 or socks5) prepend it to the Ip like: <i>socks://localhost|8080</i>.<br>
                             The ignorelist contains domains separated by <b>;</b>",
                         ParameterType = ConfigParameterType.Text,
                         CategoryName = "basic",
                         Examples = new List<Example>() {
                             new Example() {
                                 Description = "No username, password and ignorelist used.(NOT a real proxy address)",
-                                Content = @"127.0.0.1|12345"
+                                Content = @"--proxy-settings=127.0.0.1|12345"
                             },
                             new Example() {
                                 Description = "No ignorelist used.(NOT a real proxy address)",
-                                Content = @"127.0.0.1|12345|myUsername|secretPassword"
+                                Content = @"--proxy-settings=127.0.0.1|12345|myUsername|secretPassword"
                             },
                             new Example() {
                                 Description = "Proxy is not used for google.com and youtube.com.(NOT a real proxy address)",
-                                Content = @"127.0.0.1|12345|||google.com;youtube.com"
+                                Content = @"--proxy-settings=127.0.0.1|12345|||google.com;youtube.com"
+                            },
+                            new Example() {
+                                Description = "Proxy using the socks5 protocol.(NOT a real proxy address)",
+                                Content = @"--proxy-settings=socks5://localhost|8080"
                             }
                         }
                     }},
