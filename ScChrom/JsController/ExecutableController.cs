@@ -59,8 +59,8 @@ namespace ScChrom.JsController {
                         "Closes a previously started program.",
                         new List<JsControllerMethodParameter>() {
                             new JsControllerMethodParameter(
-                                "executablePath",
-                                "Path to the executable.",
+                                "exit_callbackId",
+                                "The exit_callbackId used when starting the program.",
                                 JsControllerMethodInfo.DataType.text
                             ),
                         }
