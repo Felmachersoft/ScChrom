@@ -18,6 +18,7 @@ namespace ScChrom.Tools {
             debug = 3   // debug output, infos and errors
         }
 
+        private static List<Tuple<LogLevel, string>> _preInitLog = new List<Tuple<LogLevel, string>>();
         private static Logger _instance = null;
         private static object _locker = new object();
         public static event Action<LogLevel, string> ContentLogged;
@@ -57,10 +58,19 @@ namespace ScChrom.Tools {
 
             _instance = new Logger(logLevel, logfilepath);
 
+            foreach (var preLogLine in _preInitLog)
+                Log(preLogLine.Item2, preLogLine.Item1);
+            
         }
         
         public static void Log(string content, LogLevel loglevel = LogLevel.info){            
             lock(_locker){
+
+                if(_instance == null) {
+                    _preInitLog.Add(new Tuple<LogLevel, string>(loglevel, content));
+                    return;
+                }
+
                 if(loglevel > _instance._currentLoglevel)
                     return;
                 

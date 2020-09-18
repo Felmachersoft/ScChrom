@@ -493,7 +493,7 @@ namespace ScChrom.Tools {
             try {
                 ret = Newtonsoft.Json.Linq.JObject.Parse(line).ToObject<Dictionary<string, string>>();
             } catch (Exception ex) {
-                Logger.Log("Failed to parse infos, error was: " + ex.Message, Logger.LogLevel.info);
+                Logger.Log("Failed to parse meta infos in the first line, error was: " + ex.Message, Logger.LogLevel.error);
                 return null;
             }
 
