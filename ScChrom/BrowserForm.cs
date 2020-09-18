@@ -83,7 +83,7 @@ namespace ScChrom {
             if (html != null) {
                 browser = new ChromiumWebBrowser((CefSharp.Web.HtmlString)html);
             } else {
-                url = Tools.Arguments.GetArgument("url", "scchrom://startup").Trim();
+                url = Tools.Arguments.GetArgument("url", "ScChrom://internal/startup").Trim();
                 // get absolute path of file if relative 
                 if (url.StartsWith(".."))
                     url = Path.Combine(Environment.CurrentDirectory, url.Replace("/", "\\"));

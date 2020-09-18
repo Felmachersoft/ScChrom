@@ -92,7 +92,7 @@ namespace ScChrom {
 
             if (Arguments.AllArguments == null || Arguments.AllArguments.Count == 0) {
                 Tools.Logger.Log("No command line arguments given, showing startup page", Logger.LogLevel.debug);
-                Arguments.ParseConfigArgs(new string[]{"--url=ScChrom://startup"});
+                Arguments.ParseConfigArgs(new string[]{ "--url=ScChrom://internal/startup" });
             }
 
             // prepare to cleanup
