@@ -64,17 +64,6 @@ namespace ScChrom.JsController {
                                 JsControllerMethodInfo.DataType.text
                             ),
                         }
-                    ),                    
-                    new JsControllerMethodInfo(
-                        "callInBrowserCallback",
-                        "This calls the callback that was registered via 'ScChrom.addCallback(id)' in the browser context.",
-                        new List<JsControllerMethodParameter>() {
-                            new JsControllerMethodParameter(
-                                "exitcallback_id",
-                                "The exitcallback_id used to start the program via the 'startProgram' method.",
-                                JsControllerMethodInfo.DataType.text
-                            )
-                        }
                     ),
                     new JsControllerMethodInfo(
                         "startNewScChrom",
