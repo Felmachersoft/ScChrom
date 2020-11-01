@@ -127,7 +127,7 @@ namespace ScChrom.Tools {
                 var eng = Engine.Execute(functionScript);
                 return eng.Invoke("executeFunc").ToString();
             } catch (Exception ex) {
-                string errorString = "Error while executing script";
+                string errorString = "Error while executing script ";
                 if (!string.IsNullOrWhiteSpace(exceptionInfo))
                     errorString += exceptionInfo;
                 errorString += ": ";

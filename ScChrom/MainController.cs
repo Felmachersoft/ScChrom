@@ -302,10 +302,10 @@ namespace ScChrom {
             Cef.ClearSchemeHandlerFactories();
 
             // ... register all new schemes
-            Cef.GetGlobalRequestContext().RegisterSchemeHandlerFactory("http", "", resourceSchemehandler);
-            Cef.GetGlobalRequestContext().RegisterSchemeHandlerFactory("https", "", resourceSchemehandler);
-            Cef.GetGlobalRequestContext().RegisterSchemeHandlerFactory("scchrom", "", resourceSchemehandler);
-
+            var globalRequestContext = Cef.GetGlobalRequestContext();
+            globalRequestContext.RegisterSchemeHandlerFactory("http", "", resourceSchemehandler);
+            globalRequestContext.RegisterSchemeHandlerFactory("https", "", resourceSchemehandler);
+            globalRequestContext.RegisterSchemeHandlerFactory("scchrom", "", resourceSchemehandler);
             
         }
 

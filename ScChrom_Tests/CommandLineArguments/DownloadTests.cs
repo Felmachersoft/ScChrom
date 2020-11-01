@@ -24,9 +24,14 @@ namespace ScChrom_Tests.CommandLineArguments {
                 --browser-js-allow_objects=WindowController                
                 --injected-javascript=
                     setTimeout(function() {
-                        document.getElementById('js-download-hero').click();
-                        ScChrom.log('test');
-                        setTimeout(ScChrom.WindowController.closeMainwindow, 200);
+                        let downloadElem = document.getElementById('js-download-hero');
+                        if(!downloadElem){
+                            ScChrom.log('Download element not found');
+                            setTimeout(ScChrom.WindowController.closeMainwindow, 200);
+                            return;    
+                        }
+                        downloadElem.click();                        
+                        setTimeout(ScChrom.WindowController.closeMainwindow, 500);
                     }, 100);
                 --reject-downloads=true
                 --on-before-download=
@@ -48,8 +53,7 @@ namespace ScChrom_Tests.CommandLineArguments {
             Program.ShowBrowserBlocking(args.ToArray());
 
 
-            Assert.AreEqual(1, lines.Count, "Unnecessary lines written");
-            Assert.AreEqual(lines[0], "test", "Javascript failed to execute");
+            Assert.AreEqual(0, lines.Count, "Unnecessary lines written");            
         }
 
         
