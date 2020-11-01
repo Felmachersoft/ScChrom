@@ -85,14 +85,14 @@ namespace ScChrom.View {
                 var ret = new List<OnlineDependency>() { 
                     new OnlineDependency() {
                         Name = "CefSharp.Common",
-                        TotalBytes = 7933594,
-                        URL = baseUrl + "CefSharp.Common/83.4.20",
+                        TotalBytes = 9685269, 
+                        URL = baseUrl + "CefSharp.Common/85.3.130",
                         SourceDirectory = Path.Combine("CefSharp", "x" + (Environment.Is64BitOperatingSystem ? "64" : "32"))
                     },
                     new OnlineDependency() {
                         Name = "CefSharp.WinForms",
-                        TotalBytes = 105328,
-                        URL = baseUrl + "CefSharp.WinForms/83.4.20",
+                        TotalBytes = 106193,
+                        URL = baseUrl + "CefSharp.WinForms/85.3.130",
                         SourceDirectory = Path.Combine("CefSharp", "x" + (Environment.Is64BitOperatingSystem ? "64" : "32"))
                     },
                     new OnlineDependency() {
@@ -118,15 +118,15 @@ namespace ScChrom.View {
                 if (Environment.Is64BitOperatingSystem) {
                     ret.Add(new OnlineDependency() {
                         Name = "Redis64",
-                        TotalBytes = 76129053,
-                        URL =  baseUrl + "cef.redist.x64/83.4.2",
+                        TotalBytes = 80754395,
+                        URL =  baseUrl + "cef.redist.x64/85.3.13",
                         SourceDirectory = "CEF"
                     });
                 } else {
                     ret.Add(new OnlineDependency() {
                         Name = "Redis32",
-                        TotalBytes = 72411264,
-                        URL = baseUrl + "cef.redist.x86/83.4.2",
+                        TotalBytes = 76714841,
+                        URL = baseUrl + "cef.redist.x86/85.3.13",
                         SourceDirectory = "CEF"
                     });
                 }
