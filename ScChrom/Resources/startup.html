@@ -240,12 +240,17 @@
       white-space: nowrap;
     }
 
-    #update_notice {
+    #update_notice_container {
       position: absolute;
       right: 5px;
       top: 10px;
       color: #53c75c;
       font-size: 1.5em;
+      font-weight: bold;
+    }
+
+    .update_notice {
+      color: #53c75c;      
       font-weight: bold;
       text-decoration: underline;
       cursor:pointer;
@@ -266,9 +271,13 @@
       <label>Things to do next:</label>
     </div>
 
-    <a id="update_notice" data-version="" href="">
-      Checking version...
-    </a>
+    <div id="update_notice_container" data-version="">
+      <label id="update_notice">Checking for new version...</label>
+      <a id="update_link" class="update_notice" href="" style="display:none;">checking...</a>
+      <a id="update_start" class="update_notice" href="" style="display:none;">update</a>
+    </div>
+    
+    
 
     <div class="pure-g">
       <div class="pure-u-1 pure-u-md-1-3 centered">
@@ -1445,19 +1454,23 @@
 
         if (oVNr > cVNr)
           return true;
+
+        if (cVNr > oVNr)
+          return false;
+
       }
     
       return false;
     }
 
     var getCurrentVersion = function(){
-      let updateElem = document.getElementById('update_notice');
+      let updateElem = document.getElementById('update_notice_container');
       return updateElem.getAttribute('data-version');
     }
 
     var checkForUpdates = function (repo, curVersion) {
       
-      let updateElem = document.getElementById('update_notice');
+      let updateElem = document.getElementById('update_notice_container');
 
       // prevent double checking
       if (getCurrentVersion() != '')
@@ -1478,10 +1491,24 @@
           let newVersion = data.name;
 
           if (isNewerVersion(curVersion, newVersion)) {
-            updateElem.innerText = "Get new version";
-            updateElem.href = "external:https://github.com/" + repo + "/releases";
+            let updateLink_elem = document.getElementById('update_link');
+            updateLink_elem.innerText = "show";
+            updateLink_elem.href = "external:https://github.com/" + repo + "/releases";
+            updateLink_elem.style.display = "";
+
+            let updateStart_elem = document.getElementById('update_start');
+            updateStart_elem.innerText = "update";
+            updateStart_elem.style.display = "";
+            updateStart_elem.onclick = (ev) => {
+              fetch('scchrom://update');
+              document.body.innerHTML = '<div class="update_notice">Please wait... starting update<div>';
+              ev.preventDefault();
+            };
+
+            let updateNotice_elem = document.getElementById('update_notice');
+            updateNotice_elem.innerText = "New version:";
           } else {
-            update_notice.style.display = 'none';
+            updateElem.style.display = 'none';
           }
           
         }

@@ -121,12 +121,14 @@
     <Compile Include="JsController\ExecutableController.cs" />
     <Compile Include="JsController\FilesystemController.cs" />
     <Compile Include="JsController\JsControllerInfo.cs" />
+    <Compile Include="JsController\UpdateController.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Handler\SchemeHandlerFactory.cs" />
+    <Compile Include="Tools\DependencyInstaller.cs" />
     <Compile Include="View\ChromeWidgetMessageInterceptor.cs" />
     <Compile Include="View\ViewTools.cs" />
     <Compile Include="CustomResourceRequestHandlers\OutputResponse_ScriptedEvent.cs" />
@@ -217,7 +219,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\default.sccf" />
-    <None Include="Resources\ScChrom.svg" />
     <None Include="Resources\ScChrom64.png" />
     <Content Include="Resources\streambuffre_icon.png" />
     <None Include="Resources\menu.png" />

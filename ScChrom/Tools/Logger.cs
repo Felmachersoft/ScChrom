@@ -47,8 +47,8 @@ namespace ScChrom.Tools {
 
             if (!string.IsNullOrWhiteSpace(logfilepath)) {
                 try {
-                    if (System.IO.File.Exists(logfilepath))
-                        System.IO.File.Delete(logfilepath);                    
+                    if (File.Exists(logfilepath))
+                        File.Delete(logfilepath);                    
                 } catch (Exception ex) {
                     throw new ArgumentException("Error while preparing log file: " + ex.Message, "logfilepath");
                 }

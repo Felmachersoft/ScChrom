@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -30,7 +32,7 @@ namespace ScChrom.Tools {
         /// <param name="pattern"></param>
         /// <returns></returns>
         public static bool MatchText(string text, string pattern) {
-            string regexPattern = Tools.Common.WildCardToRegular(pattern);
+            string regexPattern = WildCardToRegular(pattern);
             return Regex.IsMatch(text, regexPattern);
         }
 
@@ -41,11 +43,11 @@ namespace ScChrom.Tools {
         /// <param name="path"></param>
         /// <returns></returns>
         public static bool IsValidLocalPath(string path) {
-            System.IO.FileInfo fi = null;
+            FileInfo fi = null;
             try {
-                fi = new System.IO.FileInfo(path);
+                fi = new FileInfo(path);
             } catch (ArgumentException) {
-            } catch (System.IO.PathTooLongException) {
+            } catch (PathTooLongException) {
             } catch (NotSupportedException) {
             }
 
@@ -58,8 +60,8 @@ namespace ScChrom.Tools {
         /// <param name="base64EncodedData"></param>
         /// <returns></returns>
         public static string Base64Decode(string base64EncodedData) {
-            var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
-            return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
+            var base64EncodedBytes = Convert.FromBase64String(base64EncodedData);
+            return Encoding.UTF8.GetString(base64EncodedBytes);
         }
 
         /// <summary>
@@ -140,13 +142,13 @@ namespace ScChrom.Tools {
         /// </summary>
         /// <param name="url">If no valid url given, nothing will be done</param>
         public static void OpenLinkInDefaultBrowser(string url) {
-            if (url != null && !url.Contains(" ") && !ScChrom.Tools.Common.IsValidLocalPath(url)) {
+            if (url != null && !url.Contains(" ") && !IsValidLocalPath(url)) {
                 Uri uri = null;
                 if (Uri.TryCreate(url, UriKind.RelativeOrAbsolute, out uri)) {
                     try {
-                        System.Diagnostics.Process.Start(uri.ToString());
+                        Process.Start(uri.ToString());
                     } catch (Win32Exception ex) {
-                        Tools.Logger.Log("Error occured while opening link: " + ex.Message, Tools.Logger.LogLevel.error);
+                        Logger.Log("Error occured while opening link: " + ex.Message, Logger.LogLevel.error);
                     }
                 }
             }
@@ -262,7 +264,7 @@ namespace ScChrom.Tools {
                     errorText += " from parameter " + parameterName;
                 errorText += ": " + ex.Message;
 
-                Tools.Logger.Log(errorText, Tools.Logger.LogLevel.error);
+                Logger.Log(errorText, Logger.LogLevel.error);
                 return;
             }
 
@@ -274,7 +276,7 @@ namespace ScChrom.Tools {
 
             JArray entries = result["entries"] as JArray;
             if (entries == null) {
-                Tools.Logger.Log("Error while getting entries of result from parameter " + parameterName, Tools.Logger.LogLevel.error);
+                Logger.Log("Error while getting entries of result from parameter " + parameterName, Tools.Logger.LogLevel.error);
                 return;
             }
 
@@ -289,7 +291,7 @@ namespace ScChrom.Tools {
                     try {
                         text = entry["text"].ToObject<string>();
                     } catch (Exception) {
-                        Tools.Logger.Log("Invalid 'text' for entry of result from parameter " + parameterName, Tools.Logger.LogLevel.error);
+                        Logger.Log("Invalid 'text' for entry of result from parameter " + parameterName, Tools.Logger.LogLevel.error);
                     }
                 }
 
@@ -298,7 +300,7 @@ namespace ScChrom.Tools {
                     try {
                         type = entry["type"].ToObject<string>();
                     } catch (Exception) {
-                        Tools.Logger.Log("Invalid 'type' for entry of result from parameter " + parameterName, Tools.Logger.LogLevel.error);
+                        Logger.Log("Invalid 'type' for entry of result from parameter " + parameterName, Tools.Logger.LogLevel.error);
                     }
                 }
 
@@ -314,7 +316,7 @@ namespace ScChrom.Tools {
                             try {
                                 isChecked = entry["checked"].ToObject<bool>();
                             } catch (Exception) {
-                                Tools.Logger.Log("Invalid value for 'checked' for entry of result from parameter " + parameterName, Tools.Logger.LogLevel.error);
+                                Logger.Log("Invalid value for 'checked' for entry of result from parameter " + parameterName, Tools.Logger.LogLevel.error);
                             }                            
                         }
                         newItem = new ToolStripButton(text) { Checked = isChecked };
@@ -328,6 +330,23 @@ namespace ScChrom.Tools {
                 cms.Items.Add(newItem);
             }
 
+        }
+
+        public static void CopyFolder(string sourceFolder, string destFolder) {
+            if (!Directory.Exists(destFolder))
+                Directory.CreateDirectory(destFolder);
+            string[] files = Directory.GetFiles(sourceFolder);
+            foreach (string file in files) {
+                string name = Path.GetFileName(file);
+                string dest = Path.Combine(destFolder, name);
+                File.Copy(file, dest, true);
+            }
+            string[] folders = Directory.GetDirectories(sourceFolder);
+            foreach (string folder in folders) {
+                string name = Path.GetFileName(folder);
+                string dest = Path.Combine(destFolder, name);
+                CopyFolder(folder, dest);
+            }
         }
     }
 }

@@ -515,8 +515,7 @@ namespace ScChrom {
 
             bool allowExternalLinks = Arguments.GetArgument("allow-external-links", "false").ToLower().Trim() == "true";
             browser.RequestHandler = new CustomRequestHandler(ppUrls, allowRedirects, onBeforeBrowseHandlerScript, allowExternalLinks);
-
-            // TODO hier den parameter so machen, dass wenn man damit das öffnen in einem neuen tab im aktuellen browser machen kann (z.B. auf startpage.de)
+            
             bool preventPopups = Arguments.GetArgument("prevent-popups", "true") != "false";
             if (preventPopups) {
                 // prevents popups

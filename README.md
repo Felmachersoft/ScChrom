@@ -1,4 +1,4 @@
-# <img style="height:30px" src="./ScChrom_logo.svg">ScChrom
+# <img height="30" src="./ScChrom_logo.svg"> ScChrom
 
 ScChrom (**Sc**riptable **Chrom**ium) is an open source, easy to deploy and extensible 
 Chromium based highly configurable browser build with CefSharp and Jint. It is suited for many 
@@ -30,7 +30,6 @@ contact with us:
 - [Contact form on our webpage](https://felmachersoft.de/en) 
 - E-mail us at `contact@felmachersoft(dot)de`. 
 
-
 ## Architecture
 <img src="./architecture.svg">
 
@@ -43,6 +42,95 @@ ScChrom is configured via parameters. Some of them control ScChroms behavior, so
 settings of chromium, other provide ways to inject JavaScript in the mentioned contexts.
 [JavaScript controllers](#javascript-controller) provide a simple way to add functionality that
 can be called from within the JavaScript contexts.
+
+## Setup / Update
+The ScChrom.exe alone doesn't come with all dependencies included. If started without the dependencies in place it will automatically show the setup window.
+If a newer version is available ScChrom shows it in the main window on the upper right when started without parameters. <br>
+**BEWARE:** The update will remove everything but *.sccf-files and directories not related to Cef from the directory of the ScChrom.exe.
+
+### Command line setup arguments
+ScChrom can also be setup and updated via command line. Following command line arguments are available (if any of them are used all following parameters are ignored):
+  - `check` <br>
+    Checks if ScChrom is correctly set up, if not the exit code won't be 0.
+  - `version` <br>
+    Writes ScChroms version to the standard output.
+  - `latest_version_info` <br>
+    Writes multiple lines to the standard output. The first line is the latest
+    online available version of ScChrom. The second line is the direct download URL of the latest ScChrom release. The last line ends with *False* if a newer version is available.
+  - `cef_version` <br>
+    Writes the necessary Cef version to the standard output.
+  - `dependencies` <br>
+    Writes the names and versions of the dependencies as used by [NuGet](https://www.nuget.org/) separated by a : to the standard output.
+  - `update_args` <br>
+    Writes the command line arguments that can be used to update this ScChrom instance. An example for the written out line (for a ScChrom.exe placed in C:\ScChrom):
+    ```
+    cmd_install,processId:1244,installedDependencies:CefSharp.Common/85.3.130:CefSharp.WinForms/85.3.130:jint/3.0.0-beta-1632:esprima/1.0.1251:Newtonsoft.Json/12.0.3:cef.redist.x64/85.3.13=C:\ScChrom
+    ```        
+    See `cmd_install` for details about the parameters.<br>    
+  - `cmd_install` <br>
+    Starts the installation or update of ScChrom with the given parameters. The argument structure is:
+    ``` 
+    cmd_install<list of parameters>=<destination path>
+    ```
+    the parameters are separated by commas. Following parameters are possible:
+    - *processId*:\<processId\> <br>
+    The updater/installer waits with the installation/update till the process with the given \<processId\> is no longer running.
+    - *installedDependencies:*\<list of dependencies\> <br>
+    The \<list of dependencies\> lists all dependencies separated by `:` and is only used for updates. It is used to check if the dependencies from the called ScChrom.exe and the updated one match. If they match only the ScChrom.exe is replace. Otherwise the destination directory is cleared (subdirectories - other than the locales and swiftshader directories - and .sccf files will not be deleted) and the new dependencies are downloaded and setup.
+    - *dontCheck* <br>
+    If set the installed/updated ScChrom will not be checked for missing dependencies. If not set and one or more dependencies are missing, the setup will fail with an error message.
+    - *startAfter* <br>
+    If set the installed/updated ScChrom.exe is started.
+    - *cleanup* <br>
+    Removes all but the *.sccf* files from the installation directory. Additionally, the chromium specific subdirectories *locales* and *swiftshader* are deleted.
+    - *showUpdateGui* <br>
+    If set a window will be shown that displays the update progress. If not set the progress will be written out to the standard output in the form of:
+        ```
+        Downloading next dependency
+        1% finished    
+        Extracting <dependency>
+        ...   
+        100% finished
+        Extracting <another dependency>    
+        Check finished
+        Installation finished
+        ```
+
+
+### Command line setup examples
+#### Installation
+  An example line to setup ScChrom via the command line (the directory has to exist before execution):    
+  ```
+  ScChrom.exe cmd_install=C:\ScChrom
+  ```
+#### Update
+  Here is an example workflow demonstrating how ScChrom could be updated by another program via command line commands. In this example ScChrom is correct setup in ``C:\ScChrom`` .<br>
+  - Check for newer version via:
+    ```
+    C:\ScChrom\ScChrom.exe latest_version_info
+    ```
+    Example output:
+    ``` 
+    1.1.0.0
+    https://github.com/Felmachersoft/ScChrom/releases/latest/download/ScChrom.exe
+    up to date:False
+    ```
+    The last line ending with *False* shows that a newer version is available. <br>
+  - Your application has to download the latest version of ScChrom via the provided URL. For the next steps we will assume the latest ScChrom.exe has been downloaded to ``C:\newScChrom`` .
+  - Get the necessary update parameters via:
+    ```
+    C:\ScChrom\ScChrom.exe update_args
+    ```
+    Example output:
+    ``` 
+    cmd_install,processId:6580,installedDependencies:CefSharp.Common/85.3.130:CefSharp.WinForms/85.3.130:jint/3.0.0-beta-1632:esprima/1.0.1251:Newtonsoft.Json/12.0.3:cef.redist.x64/85.3.13=C:\ScChrom
+    ```
+  - Using the output of the previous step with the new downloaded ScChrom.exe will update the old version:
+    ```
+    C:\newScChrom\ScChrom.exe cmd_install,processId:6580,installedDependencies:CefSharp.Common/85.3.130:CefSharp.WinForms/85.3.130:jint/3.0.0-beta-1632:esprima/1.0.1251:Newtonsoft.Json/12.0.3:cef.redist.x64/85.3.13=C:\ScChrom
+    ```
+    After execution the ScChrom instance at ``C:\ScChrom`` is up to date.
+
 
 ## Parameters
 ScChrom is configured by parameters provided via command line arguments and/or a config file. 
@@ -91,10 +179,12 @@ value contains spaces it needs to be surrounded by `"` like so:
 `ScChrom.exe --param1=true --param2="value with spaces" --param3<sk>=12`
 
 Following special arguments can only be used as command line arguments:
-  - `--config-file=PATH` see next passage
-  - `--config-base64=CONTENT` can be used instead of `--config-file` to provide a complete (base64 encoded) config without using an extra file
-  - `--logfile=PATH` if set everything logged to the standard output will also be written to the given file
-  - `--version` if set ScChrom will only write its version to the standard output and directly close afterwards 
+  - `--config-file=PATH` <br>
+    see next passage
+  - `--config-base64=CONTENT` <br>
+    can be used instead of `--config-file` to provide a complete (base64 encoded) config without using an extra file
+  - `--logfile=PATH` <br>
+    if set everything logged to the standard output will also be written to the given file
 
 
 ### Config files

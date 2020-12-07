@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,7 +31,7 @@ namespace ScChrom.Tools {
             get {
                 if (_configfilePath == null)
                     return null;
-                return System.IO.Path.GetDirectoryName(_configfilePath);
+                return Path.GetDirectoryName(_configfilePath);
             }
         }
 
@@ -39,10 +40,14 @@ namespace ScChrom.Tools {
         /// </summary>
         public static IReadOnlyDictionary<string, string> AllArguments {
             get {
-                if(_args == null) {                    
-                    var commandLineArgs = Environment.GetCommandLineArgs();                    
+                if(_args == null) {
+                    var commandLineArgs = Environment.GetCommandLineArgs();
+
+                    if (Program.OnlyCheck)
+                        commandLineArgs = new string[] { commandLineArgs[0] };
+
                     parseCommandLineArgs(commandLineArgs);
-                }               
+                }
                 return _args;
             }
         }
@@ -71,7 +76,7 @@ namespace ScChrom.Tools {
 
                 return _infos;
             }
-        }        
+        }
 
         #endregion
 
@@ -88,7 +93,7 @@ namespace ScChrom.Tools {
                 Dictionary<string, string> tempStacked = null;
                 if (StackedArguments.TryGetValue(parameterName, out tempStacked) && tempStacked.Count == 1) {
                     foreach (var entry in tempStacked)
-                        return entry.Value;                    
+                        return entry.Value;
                 }
                 return defaultValue;
             }
@@ -170,7 +175,7 @@ namespace ScChrom.Tools {
         /// <returns>The dictionay keys are the stackname like &lt;stackname&gt;, the value is a tuple of the given urlpattern and the content </returns>
         public static Dictionary<string, Tuple<RequestIdentifier, string>> GetStackedArgsWithIds(string parameterName) {
             Dictionary<string, string> arguments = GetStackedArguments(parameterName);
-            if (arguments == null || arguments.Count <= 0) 
+            if (arguments == null || arguments.Count <= 0)
                 return null;
             
             
@@ -253,7 +258,7 @@ namespace ScChrom.Tools {
         #region Parsing 
 
         private static void parseCommandLineArgs(string[] commandLineArgs) {
-                        
+            
             // check if only config file given
             if (commandLineArgs.Length == 2 && !commandLineArgs.Last().StartsWith("--")) {
                 string path = commandLineArgs.Last();
@@ -262,13 +267,12 @@ namespace ScChrom.Tools {
                 }
 
                 // is a file? => load it
-                if (Common.IsValidLocalPath(path) && System.IO.File.Exists(path)) {                                        
+                if (Common.IsValidLocalPath(path) && File.Exists(path)) {
                     string configFileArg = @"--config-file=""" + path + @"""";
-                    commandLineArgs[1] = configFileArg;                    
+                    commandLineArgs[1] = configFileArg;
                 } else {
                     // direct error output because no logger setting specified yet
-                    Console.Error.WriteLine("Invalid path to config file given: " + commandLineArgs.Last());
-                    Environment.Exit(2);
+                    Program.ExitWithError((int)Program.Exitcode.ConfigfileNotFound, "Invalid path to config file given: " + commandLineArgs.Last());
                 }
             }
 
@@ -319,16 +323,14 @@ namespace ScChrom.Tools {
                 if (key == "config-file") {
                     string path = null;
                     try {
-                        path = System.IO.Path.GetFullPath(val);
+                        path = Path.GetFullPath(val);
                     } catch (Exception) {
-                        Console.Error.WriteLine("Invalid path for config file given: " + path);
-                        Environment.Exit(1);
+                        Program.ExitWithError((int)Program.Exitcode.InvalidConfigPath, "Invalid path for config file given: " + path);                        
                     }
                     
-                    if (!System.IO.File.Exists(path)) {
-                        Console.Error.WriteLine("Could not find specified config file: " + path);
-                        Environment.Exit(2);
-                    }
+                    if (!File.Exists(path)) 
+                        Program.ExitWithError((int)Program.Exitcode.ConfigfileNotFound, "Could not find specified config file: " + path);
+                    
 
                     _configfilePath = path;
 
@@ -348,14 +350,13 @@ namespace ScChrom.Tools {
         }
 
         private static string[] readConfigFile(string path){
-                        
+
             string[] lines = null;
 
             try {
-                lines = System.IO.File.ReadAllLines(path);
+                lines = File.ReadAllLines(path);
             } catch (Exception ex) {
-                Console.Error.WriteLine("Could not read from config file: " + ex.Message);
-                Environment.Exit(3);
+                Program.ExitWithError((int)Program.Exitcode.UnableToReadConfig, "Could not read from config file: " + ex.Message);
             }
 
             return lines;
@@ -372,8 +373,7 @@ namespace ScChrom.Tools {
             try {
                 configContent = Tools.Common.Base64Decode(base64string);
             } catch (Exception ex) {
-                Console.Error.WriteLine("Could not decode Base64. Error was: " + ex.Message);
-                Environment.Exit(3);
+                Program.ExitWithError((int)Program.Exitcode.UnableToReadConfig, "Could not decode Base64. Error was: " + ex.Message);                
             }
             var configLines = configContent.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
 
@@ -448,7 +448,7 @@ namespace ScChrom.Tools {
                 }
 
 
-                for (int i = 1; i < pKLines.Count; i++) {              
+                for (int i = 1; i < pKLines.Count; i++) {
                     paramVal += pKLines[i];
                     
                     // if not last line of param add line break
@@ -501,7 +501,7 @@ namespace ScChrom.Tools {
         }
 
         #endregion
-        
+
 
         /// <summary>
         /// Splits a single string at the line breaks into string array.

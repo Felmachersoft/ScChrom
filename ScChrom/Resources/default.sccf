@@ -12,4 +12,5 @@
 --allow-file_resource=true
 --injected-javascript=
   checkForUpdates('Felmachersoft/ScChrom', ScChrom.version);
-  
+--on-before-request<scchrom://update>=
+  UpdateController.update();

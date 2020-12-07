@@ -88,10 +88,10 @@ namespace ScChrom {
         /// </summary>
         private void run() {
             
-            Tools.Logger.Log("Starting the MainController", Logger.LogLevel.debug);
+            Logger.Log("Starting the MainController", Logger.LogLevel.debug);
 
             if (Arguments.AllArguments == null || Arguments.AllArguments.Count == 0) {
-                Tools.Logger.Log("No command line arguments given, showing startup page", Logger.LogLevel.debug);
+                Logger.Log("No command line arguments given, showing startup page", Logger.LogLevel.debug);
                 Arguments.ParseConfigArgs(new string[]{ "--url=ScChrom://internal/startup" });
             }
 
@@ -126,7 +126,7 @@ namespace ScChrom {
                         Closed -= handlePriorClosing;
                         Application.Exit();
                     } else {
-                        Tools.Logger.Log("Prevented closing due to max-runtime", Logger.LogLevel.debug);
+                        Logger.Log("Prevented closing due to max-runtime", Logger.LogLevel.debug);
                     }
                 });
             }
@@ -185,8 +185,7 @@ namespace ScChrom {
                         fullPath = Path.GetFullPath(cachePath);                        
                     } catch (Exception ex) {
                         // path not valid
-                        Logger.Log("Invalid cache-path given (" + cachePath + "), error was: " + ex.Message, Logger.LogLevel.error);
-                        Environment.Exit(4);
+                        Program.ExitWithError((int)Program.Exitcode.InvalidCachePath, "Invalid cache-path given (" + cachePath + "), error was: " + ex.Message, true);
                     }
                     
                     cachePath = Environment.ExpandEnvironmentVariables(cachePath);
@@ -235,14 +234,14 @@ namespace ScChrom {
                     } else {
                         Logger.Log("Ignored invalid value parameter proxy-settings", Logger.LogLevel.info);
                     }
-                }                
+                }
 
                 //Perform dependency check to make sure all relevant resources are in our output directory.
                 Cef.Initialize(settings, performDependencyCheck: true, browserProcessHandler: null);
             }
 
             setupSchemes();
-            
+
 
             BrowserJsController = new BrowserJsController(Arguments.GetArgument("browser-js-allow_objects", "false"));
 
@@ -251,7 +250,16 @@ namespace ScChrom {
             
             if (Started != null)
                 Started.Invoke();
-                                   
+
+            if (Program.OnlyCheck) {
+                mainWindow.WindowState = FormWindowState.Minimized;
+                mainWindow.ShowInTaskbar = false;
+                Task.Run(() => {
+                    System.Threading.Thread.Sleep(1000);
+                    mainWindow.Invoke(new Action(() => { mainWindow.Close(); }));
+                });
+            }
+
             mainWindow.ShowDialog();
             
         }
@@ -318,7 +326,7 @@ namespace ScChrom {
         public void Start() {
 
             if (_isRunning) {
-                Tools.Logger.Log("Starting the MainController a second time is forbidden. Use the Restart method.", Logger.LogLevel.error);
+                Logger.Log("Starting the MainController a second time is forbidden. Use the Restart method.", Logger.LogLevel.error);
                 throw new ApplicationException("Starting the MainController a second time is forbidden. Use the Restart method.");
             }
             _isRunning = true;
