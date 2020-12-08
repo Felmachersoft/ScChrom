@@ -34,14 +34,14 @@ namespace ScChrom {
                 var ret = new List<OnlineDependency>() {
                     new OnlineDependency() {
                         Name = "CefSharp.Common",
-                        TotalBytes = 9685269,
-                        URL = nugetBaseUrl + "CefSharp.Common/85.3.130",
+                        TotalBytes = 9335173,
+                        URL = nugetBaseUrl + "CefSharp.Common/86.0.241",
                         SourceDirectory = Path.Combine("CefSharp", "x" + (Environment.Is64BitOperatingSystem ? "64" : "32"))
                     },
                     new OnlineDependency() {
                         Name = "CefSharp.WinForms",
-                        TotalBytes = 106193,
-                        URL = nugetBaseUrl + "CefSharp.WinForms/85.3.130",
+                        TotalBytes = 106178,
+                        URL = nugetBaseUrl + "CefSharp.WinForms/86.0.241",
                         SourceDirectory = Path.Combine("CefSharp", "x" + (Environment.Is64BitOperatingSystem ? "64" : "32"))
                     },
                     new OnlineDependency() {
@@ -67,15 +67,15 @@ namespace ScChrom {
                 if (Environment.Is64BitOperatingSystem) {
                     ret.Add(new OnlineDependency() {
                         Name = "Redis64",
-                        TotalBytes = 80754395,
-                        URL = nugetBaseUrl + "cef.redist.x64/85.3.13",
+                        TotalBytes = 81982643,
+                        URL = nugetBaseUrl + "cef.redist.x64/86.0.24",
                         SourceDirectory = "CEF"
                     });
                 } else {
                     ret.Add(new OnlineDependency() {
                         Name = "Redis32",
-                        TotalBytes = 76714841,
-                        URL = nugetBaseUrl + "cef.redist.x86/85.3.13",
+                        TotalBytes = 77401424,
+                        URL = nugetBaseUrl + "cef.redist.x86/86.0.24",
                         SourceDirectory = "CEF"
                     });
                 }
@@ -464,12 +464,48 @@ namespace ScChrom {
             
             string updatePath = Path.Combine(Path.GetTempPath(), "ScChrom.exe");
 
+            ManualResetEventSlim waitForFinish = new ManualResetEventSlim(false);
+
             // necessary cause github enforces tls 1.2
             System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
 
             System.Net.WebClient wc = new System.Net.WebClient();
-            wc.DownloadFile(LatestReleaseDownloadUrl, updatePath);
+            Exception err = null;
+            int lastPercentage = -1;
 
+            wc.DownloadProgressChanged += (sender, e) => {
+                if (lastPercentage >= e.ProgressPercentage)
+                    return;
+                lastPercentage = e.ProgressPercentage;
+
+                var jobj = new Newtonsoft.Json.Linq.JObject();
+                jobj["progress"] = lastPercentage;
+                jobj["received_bytes"] = e.BytesReceived;
+                jobj["total_bytes"] = e.TotalBytesToReceive;
+                
+                MainController.Instance.WindowInstance.CallInBrowserCallback("update_progress", jobj.ToString(Newtonsoft.Json.Formatting.None));
+            };
+
+            wc.DownloadFileCompleted += (sender, e) => {
+                err = e.Error;
+                waitForFinish.Set();
+            };
+
+            wc.DownloadFileAsync(new Uri(LatestReleaseDownloadUrl), updatePath);
+            
+            waitForFinish.Wait(2 * 60 * 1000);
+
+            if(err != null) {
+                var jobj = new Newtonsoft.Json.Linq.JObject();
+                jobj["error"] = err.Message;
+
+                MainController.Instance.WindowInstance.CallInBrowserCallback("update_progress", jobj.ToString(Newtonsoft.Json.Formatting.None));
+
+                Logger.Log("Error while downloading update: " + err.Message, Logger.LogLevel.error);
+
+                return;
+            }
+            
             string cmdArgs = GetCmdUpdateArgs(true, true);           
 
             Process.Start(updatePath, cmdArgs);
@@ -479,5 +515,6 @@ namespace ScChrom {
             Application.Exit();
 
         }
+        
     }
 }

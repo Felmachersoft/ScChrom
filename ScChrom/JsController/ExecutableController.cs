@@ -116,12 +116,12 @@ namespace ScChrom.JsController {
                 }
                 if (!string.IsNullOrWhiteSpace(errOut_callbackId)) {
                     psi.RedirectStandardError = true;
-                    psi.UseShellExecute = false;                    
+                    psi.UseShellExecute = false;
                 }
 
                 Process proc = Process.Start(psi);
 
-                if (!string.IsNullOrWhiteSpace(stdOut_callbackId)) {                    
+                if (!string.IsNullOrWhiteSpace(stdOut_callbackId)) {
                     proc.OutputDataReceived += (object sender, DataReceivedEventArgs e) => {
                         if (e.Data == null)
                             return;
@@ -142,8 +142,8 @@ namespace ScChrom.JsController {
                 if(!string.IsNullOrWhiteSpace(exit_callbackId)) {
                     proc.EnableRaisingEvents = true;
                     proc.Exited += (object sender, EventArgs e) => {
-                        _runningProcesses.Remove(exit_callbackId);                        
-                        MainController.Instance.WindowInstance.CallInBrowserCallback(exit_callbackId, proc.ExitCode + "");                        
+                        _runningProcesses.Remove(exit_callbackId);
+                        MainController.Instance.WindowInstance.CallInBrowserCallback(exit_callbackId, proc.ExitCode + "");
                     };
                     _runningProcesses[exit_callbackId] = proc;
                 }

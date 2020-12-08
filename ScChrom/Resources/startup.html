@@ -255,6 +255,24 @@
       text-decoration: underline;
       cursor:pointer;
     }
+
+    .update_info {
+      color: #53c75c;
+      font-weight: bold;
+    }
+
+    .update_text {
+      text-align: right;
+      margin-top: 10px;
+      font-size:10px;
+    }
+
+    .update_progress {
+      background: #53c75c;
+      height: 30px;
+      margin-top: 10px;
+      width: 0%;
+    }
     
   </style>
 </head>
@@ -1499,10 +1517,28 @@
             let updateStart_elem = document.getElementById('update_start');
             updateStart_elem.innerText = "update";
             updateStart_elem.style.display = "";
-            updateStart_elem.onclick = (ev) => {
-              fetch('scchrom://update');
-              document.body.innerHTML = '<div class="update_notice">Please wait... starting update<div>';
+            updateStart_elem.onclick = (ev) => {              
               ev.preventDefault();
+              ScChrom.addCallback('update_progress', function (val) {
+                var value = JSON.parse(val);
+                if (value.error) {
+                  alert("Error while getting update: " + value.error);
+                  return;
+                }                
+                document.getElementsByClassName("update_progress")[0].style.width = value.progress + "%";
+                document.getElementsByClassName("update_text")[0].innerText = value.received_bytes + "/" + value.total_bytes + " bytes";
+              });
+              var update_html = `
+                <div style="display: flex;justify-content: center;margin-top: 40px;">
+                  <div class ="update_info">
+                    <label>Please wait... getting update</label>
+                    <br>
+                    <div class="update_progress"></div>
+                    <div class ="update_text"></div>
+                  </div>
+                </div>`;
+              document.body.innerHTML = update_html;              
+              fetch('scchrom://update');
             };
 
             let updateNotice_elem = document.getElementById('update_notice');

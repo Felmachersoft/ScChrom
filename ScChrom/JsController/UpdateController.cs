@@ -19,7 +19,7 @@ namespace ScChrom.JsController {
         }
         
         public void update() {
-            Program.DownloadAndStartUpdate();
+            Task.Run(() => Program.DownloadAndStartUpdate());
         }
         
     }
