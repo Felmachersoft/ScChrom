@@ -453,7 +453,7 @@ namespace ScChrom {
                 Console.WriteLine(tagNameString);
                 Console.WriteLine(LatestReleaseDownloadUrl);
                 if(onlineVersion != null)
-                    Console.WriteLine("up to date:" + (onlineVersion < currentVersion).ToString());
+                    Console.WriteLine("up to date:" + (onlineVersion <= currentVersion).ToString());
             } catch (Exception ex) {
                 ExitWithError((int)Exitcode.UpdateError, "Error while getting infos about latest version: " + ex.Message);
                 return;
