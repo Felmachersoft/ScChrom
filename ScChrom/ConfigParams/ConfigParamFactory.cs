@@ -187,6 +187,49 @@ namespace ScChrom.ConfigParams {
                             }
                         }
                     }},
+                    { "host-resolver-rules", new ConfigParameter() {
+                        Name = "host-resolver-rules",
+                        Information = @"Sets resolver rules on how to resolve DNS requests by manipulating or blocking them.
+                            It can be used to resolve requests through other DNS servers than the system default one.
+                            The given value is forwarded as chromiums native host-resolver-rules argument.  <br>
+                            The format of an entry:<br>
+                            MAP &#60;hostname_pattern&#62; &#60;replacement_host&#62; [':' &#60;replacement_port&#62;] [, EXCLUDE excluded_host]<br>
+                            <b><i>hostname</i></b> is either a domain or a pattern using * as wildcard.<br>
+                            <b><i>replacement_host</i></b> can be another domain, an ip address, <i>~NOTFOUND</i> or the {{<i>ip of a DNS server</i>}}. 
+                            <i>~NOTFOUND</i> will block that domain by not resolving it at all.<br>
+                            If the ip of a DNS server is used internally the <i>hostname</i> is replaced with the ip (A entry) the provided dns server provides.
+                            Will fail silently if the dns server doesn't answer. <i>hostname</i> can't use wildcards if a dns server is used.<br>
+                            Multiple replacements can be chained, separated by comma.<br>
+                            Examples for can be found here: https://datacadamia.com/chrome#dns_resolver",
+                        ParameterType = ConfigParameterType.Text,
+                        CategoryName = "basic",
+                        Examples = new List<Example>() {
+                            new Example() {
+                                Description = "google.com is redirected to twitter.com",
+                                Content = @"--host-resolver-rules=""MAP google.com twitter.com"""
+                            },
+                            new Example() {
+                                Description = "google.com will not use a DNS request but instead directly use the ip",
+                                Content = @"--host-resolver-rules=""MAP google.com 172.217.18.110"""
+                            },
+                            new Example() {
+                                Description = "Using wildcard to redirect to test subdomain",
+                                Content = @"--host-resolver-rules=""MAP prod.example.com test.example.com"""
+                            },
+                            new Example() {
+                                Description = "Every domain will be redirected to localhost unless its google.com",
+                                Content = @"--host-resolver-rules=""MAP * localhost, EXCLUDE google.com"""
+                            },
+                            new Example() {
+                                Description = "Using muliple mappings",
+                                Content = @"--host-resolver-rules=""MAP testA.com testB.com, MAP testC.com testD.com"""
+                            },
+                            new Example() {
+                                Description = "Using custom dns server (here the cloudflare DNS server) to resolve google.com",
+                                Content = @"--host-resolver-rules=""MAP google.com {{1.1.1.1}}"""
+                            },
+                        }
+                    }},
                     { "cookies", new ConfigParameter() {
                         Name = "cookies",
                         Information = @"Allows to set cookies for specified URLs. This can either be a list of cookies or a file containing the cookie list.

@@ -30,53 +30,81 @@ namespace ScChrom {
 
         public static List<OnlineDependency> Dependencies {
             get {
-                
+
                 var ret = new List<OnlineDependency>() {
                     new OnlineDependency() {
                         Name = "CefSharp.Common",
-                        TotalBytes = 9335173,
-                        URL = nugetBaseUrl + "CefSharp.Common/86.0.241",
-                        SourceDirectory = Path.Combine("CefSharp", "x" + (Environment.Is64BitOperatingSystem ? "64" : "32"))
+                        TotalBytes = 21934080,
+                        URL = nugetBaseUrl + "CefSharp.Common/94.4.50",
+                        SourceDirectories = new string[] {
+                            Path.Combine("CefSharp", "x" + (Environment.Is64BitOperatingSystem ? "64" : "32")),
+                            Path.Combine("lib", "net452")
+                        }
                     },
                     new OnlineDependency() {
                         Name = "CefSharp.WinForms",
-                        TotalBytes = 106178,
-                        URL = nugetBaseUrl + "CefSharp.WinForms/86.0.241",
-                        SourceDirectory = Path.Combine("CefSharp", "x" + (Environment.Is64BitOperatingSystem ? "64" : "32"))
+                        TotalBytes = 147456,
+                        URL = nugetBaseUrl + "CefSharp.WinForms/94.4.50",
+                        SourceDirectories = new string[] {
+                            Path.Combine("lib","net452")
+                        }
                     },
                     new OnlineDependency() {
                         Name = "Jint",
                         TotalBytes = 428983,
                         URL = nugetBaseUrl + "jint/3.0.0-beta-1632",
-                        SourceDirectory = Path.Combine("lib", "net45")
+                        SourceDirectories = new string[] {
+                            Path.Combine("lib", "net45")
+                        }
                     },
                     new OnlineDependency() {
                         Name = "Esprima",
                         TotalBytes = 204800,
                         URL = nugetBaseUrl + "esprima/1.0.1251",
-                        SourceDirectory = Path.Combine("lib", "net45")
+                        SourceDirectories = new string[] {
+                            Path.Combine("lib", "net45")
+                        }
                     },
                     new OnlineDependency() {
-                        Name = "Esprima",
-                        TotalBytes = 2596051,
-                        URL = nugetBaseUrl + "Newtonsoft.Json/12.0.3",
-                        SourceDirectory = Path.Combine("lib", "net45")
+                        Name = "Newtonsoft.Json",
+                        TotalBytes = 2068480,
+                        URL = nugetBaseUrl + "Newtonsoft.Json/13.0.1",
+                        SourceDirectories = new string[] {
+                            Path.Combine("lib", "net45")
+                        }
                     },
+                    new OnlineDependency() {
+                        Name = "System.Buffers",
+                        TotalBytes = 94208,
+                        URL = nugetBaseUrl + "System.Buffers/4.5.1",
+                        SourceDirectories = new string[] {
+                            Path.Combine("lib", "net461")
+                        }
+                    },
+                    new OnlineDependency() {
+                        Name = "DnsClient.NET",
+                        TotalBytes = 585728,
+                        URL = nugetBaseUrl + "DnsClient/1.5.0",
+                        SourceDirectories = new string[] {
+                            Path.Combine("lib", "net45")
+                        }
+                    },
+
                 };
 
                 if (Environment.Is64BitOperatingSystem) {
                     ret.Add(new OnlineDependency() {
                         Name = "Redis64",
-                        TotalBytes = 81982643,
-                        URL = nugetBaseUrl + "cef.redist.x64/86.0.24",
-                        SourceDirectory = "CEF"
+                        TotalBytes = 99184640,
+                        URL = nugetBaseUrl + "cef.redist.x64/94.4.5",
+                        SourceDirectories = new string[] { "CEF" }
                     });
                 } else {
                     ret.Add(new OnlineDependency() {
                         Name = "Redis32",
-                        TotalBytes = 77401424,
-                        URL = nugetBaseUrl + "cef.redist.x86/86.0.24",
-                        SourceDirectory = "CEF"
+                        TotalBytes = 93081600,
+                        URL = nugetBaseUrl + "cef.redist.x86/94.4.5",
+                        SourceDirectories = new string[] { "CEF" }
                     });
                 }
 
@@ -86,7 +114,7 @@ namespace ScChrom {
 
         public static Version CefVersion {
             get {
-                return new Version(85, 3, 130);
+                return new Version(94, 4, 50);
             }
         }
 
@@ -421,7 +449,7 @@ namespace ScChrom {
             var dia = new View.MissingDependenciesForm();
             Application.Run(dia);
         }
-
+        
         private static void writeOutLatestReleaseInfo() {
             // necessary cause github enforces tls 1.2
             System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;

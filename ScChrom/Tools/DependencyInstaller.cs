@@ -17,8 +17,8 @@ namespace ScChrom.Tools {
 
             public long DownloadedBytes { get; set; }
 
-            public string SourceDirectory { get; set; }
-
+            public string[] SourceDirectories { get; set; }
+            
             public bool IsFinished {
                 get {
                     return DownloadedBytes == TotalBytes;
@@ -117,7 +117,6 @@ namespace ScChrom.Tools {
             _allDependencies = allDependencies;
         }
 
-
         public void DownloadDependencies() {
 
             if (DownloadStarted != null)
@@ -147,7 +146,8 @@ namespace ScChrom.Tools {
 
         }
 
-        public void downloadDependency(OnlineDependency dependency) {
+
+        private void downloadDependency(OnlineDependency dependency) {
 
             _downloadCanceled = false;
 
@@ -216,60 +216,15 @@ namespace ScChrom.Tools {
 
                 if(ExtractionStarted != null) 
                     Task.Run(() => ExtractionStarted(_currentDependency.Name));
-                
-                System.IO.Compression.ZipFile.ExtractToDirectory(System.IO.Path.Combine(TempDirectory, _currentDependency.Name), TempDirectory);
-                string sourceFolder = "";
-                if (_currentDependency.SourceDirectory != null) {
 
-                    sourceFolder = Path.Combine(TempDirectory, _currentDependency.SourceDirectory);
+                try {
+                    extractDependency();                    
+                } catch (Exception ex) {
+                    Logger.Log("Error while removing temp directory: " + ex.Message, Logger.LogLevel.error);
 
-                    // copy to correct position
-                    var files = Directory.GetFiles(sourceFolder);
-                    foreach (var file in files) {
-                        if (file.ToLower().EndsWith(".pdb"))
-                            continue;
-                        File.Copy(file, Path.Combine(DestinationDirectory, Path.GetFileName(file)), true);
-                    }
-
-                    var dirs = Directory.GetDirectories(sourceFolder);
-                    foreach (var dir in dirs) {
-                        string dirName = new DirectoryInfo(dir).Name;
-                        Tools.Common.CopyFolder(dir, Path.Combine(DestinationDirectory, dirName));
-                    }
-
-                    cleanup();
+                    if (ErrorOccured != null)
+                        Task.Run(() => ErrorOccured.Invoke(ex));
                 }
-
-                if (_currentDependency != _allDependencies.Last()) {
-                    // download next dependency
-                    int index = _allDependencies.IndexOf(_currentDependency);
-                    var curDep = _allDependencies[index + 1];
-                    downloadDependency(curDep);
-                } else {
-                    copyNecessaryDlls();
-
-                    string destinationFile = Path.Combine(DestinationDirectory, Path.GetFileName(OwnPath));
-
-                    if(_copyOwnExecutable) {
-                        if (Path.GetFullPath(destinationFile) != Path.GetFullPath(OwnPath)) {
-                            try {
-                                File.Copy(OwnPath, destinationFile, true);
-                            } catch (Exception ex) {
-                                if (ErrorOccured != null)
-                                    ErrorOccured.Invoke(new Exception("Could not copy main executable, error was: " + ex.Message));
-                            
-                                return;
-                            }
-                        }
-                    }
-
-
-                    Logger.Log("Setup finished");
-
-                    if (InstallationFinished != null)
-                        Task.Run(InstallationFinished);
-                }
-
             });
         }
 
@@ -309,6 +264,72 @@ namespace ScChrom.Tools {
             File.WriteAllBytes(Path.Combine(DestinationDirectory, "msvcp140.dll"), Properties.Resources.msvcp140_64);
             File.WriteAllBytes(Path.Combine(DestinationDirectory, "vcruntime140.dll"), Properties.Resources.vcruntime140_64);
         }
+      
+        /// <summary>
+        /// Extracts the current Dependency and informs if it's the last one
+        /// </summary>
+        private void extractDependency() {
+            // extract nuget packages
+            System.IO.Compression.ZipFile.ExtractToDirectory(Path.Combine(TempDirectory, _currentDependency.Name), TempDirectory);
+            
+            // copy files to destination
+            foreach(var sourceDirectory in _currentDependency.SourceDirectories) {
+
+                string sourceFolder = Path.Combine(TempDirectory, sourceDirectory);
+                
+                if (!Directory.Exists(DestinationDirectory))
+                    Directory.CreateDirectory(DestinationDirectory);
+
+                // copy to correct position
+                var files = Directory.GetFiles(sourceFolder);
+                foreach (var file in files) {
+
+                    if (file.ToLower().EndsWith(".pdb") || 
+                        file.ToLower().EndsWith(".xml") ||
+                        file.ToLower().EndsWith(".txt"))
+                        continue;
+                    File.Copy(file, Path.Combine(DestinationDirectory, Path.GetFileName(file)), true);
+                }
+
+                var dirs = Directory.GetDirectories(sourceFolder);                
+                foreach (var dir in dirs) {
+                    string dirName = new DirectoryInfo(dir).Name;
+                    Common.CopyFolder(dir, Path.Combine(DestinationDirectory, dirName));
+                }                
+            }
+
+            cleanup();
+
+            if (_currentDependency != _allDependencies.Last()) {
+                // download next dependency
+                int index = _allDependencies.IndexOf(_currentDependency);
+                var curDep = _allDependencies[index + 1];
+                downloadDependency(curDep);
+            } else {                
+                // finalize setup
+
+                copyNecessaryDlls();
+
+                string destinationFile = Path.Combine(DestinationDirectory, Path.GetFileName(OwnPath));
+
+                if (_copyOwnExecutable) {
+                    if (Path.GetFullPath(destinationFile) != Path.GetFullPath(OwnPath)) {
+                        try {
+                            File.Copy(OwnPath, destinationFile, true);
+                        } catch (Exception ex) {
+                            if (ErrorOccured != null)
+                                ErrorOccured.Invoke(new Exception("Could not copy main executable, error was: " + ex.Message));
+                            return;
+                        }
+                    }
+                }
+
+                Logger.Log("Setup finished");
+
+                if (InstallationFinished != null)
+                    Task.Run(InstallationFinished);
+            }
+        }
 
         private void cleanup() {
             Logger.Log("Doing cleanup, removing temp direcctory");
@@ -316,12 +337,10 @@ namespace ScChrom.Tools {
                 if (Directory.Exists(TempDirectory))
                     Directory.Delete(TempDirectory, true);
             } catch (Exception ex) {
-
                 Logger.Log("Error while removing temp directory: " + ex.Message, Logger.LogLevel.error);
 
                 if (ErrorOccured != null)
                     Task.Run(() => ErrorOccured.Invoke(ex));
-
             }
         }
 

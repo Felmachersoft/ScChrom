@@ -25,7 +25,7 @@ namespace ScChrom.Tools {
         }
 
         /// <summary>
-        /// Matches the given text with the given pattern containing wildcrads. 
+        /// Matches the given text with the given pattern containing wildcards. 
         /// Possible wildcards are ? for single random element and * for 0 to n random elements.
         /// </summary>
         /// <param name="text"></param>
@@ -332,6 +332,11 @@ namespace ScChrom.Tools {
 
         }
 
+        /// <summary>
+        /// Recursivly copies a folder and all its content to the given destionation folder.
+        /// </summary>
+        /// <param name="sourceFolder">The source folder</param>
+        /// <param name="destFolder">The destination folder (will be created if not already existing)</param>
         public static void CopyFolder(string sourceFolder, string destFolder) {
             if (!Directory.Exists(destFolder))
                 Directory.CreateDirectory(destFolder);
@@ -347,6 +352,27 @@ namespace ScChrom.Tools {
                 string dest = Path.Combine(destFolder, name);
                 CopyFolder(folder, dest);
             }
+        }
+
+        /// <summary>
+        /// Returns the text between the start and end of given text.        
+        /// </summary>
+        /// <param name="text">The complete text</param>
+        /// <param name="start">Start string</param>
+        /// <param name="end">End string</param>
+        /// <returns>Text between start and end. Without the start and end.</returns>
+        public static string GetTextBetween(string text, string start, string end){
+            int pFrom = text.IndexOf(start);
+            if (pFrom < 0)
+                throw new ArgumentException("start not in given text", "start");
+            pFrom += start.Length;
+
+            string endOfText = text.Substring(pFrom);
+            int pTo = endOfText.IndexOf(end);            
+            if (pTo < 0)
+                throw new ArgumentException("end not in given text after start", "end");
+
+            return endOfText.Substring(0, pTo);            
         }
     }
 }

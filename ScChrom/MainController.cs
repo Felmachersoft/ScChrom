@@ -7,7 +7,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Net;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -49,7 +51,7 @@ namespace ScChrom {
             get {
                 return _isRunning;
             }
-        }        
+        }
         
         private bool _restart = false;
 
@@ -130,15 +132,14 @@ namespace ScChrom {
                     }
                 });
             }
-                                                                     
-                        
-
+            
             if (!Cef.IsInitialized) {
                 var settings = new CefSettings() {                    
                     // the positiv value enables uncaught exception
                     UncaughtExceptionStackSize = 10
                 };
                 
+
                 string backgroundColor = Arguments.GetArgument("background-color", "").Trim();
                 if (!string.IsNullOrWhiteSpace(backgroundColor)) {
                     try {
@@ -148,11 +149,13 @@ namespace ScChrom {
                     }
                 }
 
+                
                 var scchromOptions = CefSharp.Enums.SchemeOptions.Secure |
                     CefSharp.Enums.SchemeOptions.FetchEnabled |
                     CefSharp.Enums.SchemeOptions.CspBypassing |
                     CefSharp.Enums.SchemeOptions.CorsEnabled;
                 settings.RegisterScheme(new CefCustomScheme("scchrom", scchromOptions));
+
 
                 string remoteDebuggingPort = Arguments.GetArgument("remote-debugging-port", "").Trim();
                 if(!string.IsNullOrWhiteSpace(remoteDebuggingPort)) {
@@ -206,10 +209,8 @@ namespace ScChrom {
                 if(Arguments.GetArgument("webrtc-media-enabled", "false") == "true")
                     settings.CefCommandLineArgs.Add("enable-media-stream", "1");
 
-                
                 // necessary to enable some special features for the scchrom 'protocol'
                 settings.RegisterScheme(new CefCustomScheme("scchrom", CefSharp.Enums.SchemeOptions.Standard | CefSharp.Enums.SchemeOptions.CorsEnabled | CefSharp.Enums.SchemeOptions.FetchEnabled));
-                                
 
                 string proxy_settings = Arguments.GetArgument("proxy-settings");
                 if (proxy_settings != null) {
@@ -228,15 +229,17 @@ namespace ScChrom {
 
                         Logger.Log("Applying following proxy settings: Ip: " + proxy_ip + " Port: " + proxy_port + " username: " + proxy_username + " ignorelist: " + proxy_ignoreList, Logger.LogLevel.debug);
                         CefSharpSettings.Proxy = new ProxyOptions(proxy_ip, proxy_password, proxy_username, proxy_password, proxy_ignoreList);
-
+                        
                         // The previous setting alone might not work, so also add it to the command line arguments
                         settings.CefCommandLineArgs.Add("proxy-server", proxy_ip + ":" + proxy_port);
                     } else {
-                        Logger.Log("Ignored invalid value parameter proxy-settings", Logger.LogLevel.info);
+                        Logger.Log("Ignored invalid value for parameter proxy-settings", Logger.LogLevel.info);
                     }
                 }
-
-                //Perform dependency check to make sure all relevant resources are in our output directory.
+                
+                handleHostResolverRules(Arguments.GetArgument("host-resolver-rules"), ref settings);
+                
+                // Perform dependency check to make sure all relevant resources are in our output directory
                 Cef.Initialize(settings, performDependencyCheck: true, browserProcessHandler: null);
             }
 
@@ -261,10 +264,86 @@ namespace ScChrom {
             }
 
             mainWindow.ShowDialog();
-            
         }
 
-       
+        /// <summary>
+        /// Applies the custom host resolver rules to override DNS requests.
+        /// </summary>
+        /// <param name="value">The given value for the host-resolver-rules parameter</param>
+        /// <param name="settings"></param>
+        private void handleHostResolverRules(string value, ref CefSettings settings) {
+
+            if (value == null)
+                return;
+
+            // resolve domains with set DNS server if necessary
+            List<string> parts = new List<string>();
+            var rules = value.Split(',');
+            foreach (var rule in rules) {
+                if (!rule.Contains("{{")) {
+                    parts.Add(rule);
+                    continue;
+                }
+
+                string r = rule.Trim().ToLower();
+                if(!r.StartsWith("map")) {
+                    parts.Add(rule);
+                    continue;
+                }
+
+                string domain = Common.GetTextBetween(rule.ToLower(), "map ", " {{").Trim();
+
+                string dnsAddress = Tools.Common.GetTextBetween(rule, "{{", "}}");
+                
+                int port = 53; // default DNS port
+                string ip_string = null;
+                if (dnsAddress.Contains(":")) {
+                    var addressParts = dnsAddress.Split(':');
+                    ip_string = addressParts[0].Trim();
+                    string port_string = addressParts[1];
+                    if (!int.TryParse(port_string, out port)) {
+                        Logger.Log("Ignored invalid value for parameter host-resolver-rules, a port was not a valid number");
+                        return;
+                    }
+                } else {
+                    ip_string = dnsAddress.Trim();
+                }
+
+                IPAddress ipAddress = null;
+                if(!IPAddress.TryParse(ip_string, out ipAddress)) {
+                    Logger.Log("Ignored invalid value for parameter host-resolver-rules, a port was not a valid number");
+                    return;
+                }
+
+                var endpoint = new IPEndPoint(ipAddress, port);
+                var lookup = new DnsClient.LookupClient(endpoint);
+                var result = lookup.Query(domain, DnsClient.QueryType.A);
+                if(result.Answers.Count <= 0) {
+                    Logger.Log("No ip address found for domain '" + domain + "', ignoring setting for it");
+                    continue;
+                }
+                
+                string replace = Common.GetTextBetween(rule, "{{", "}}");
+                string replacement = (result.Answers[0] as DnsClient.Protocol.ARecord).Address.ToString();
+
+                string finalRule = rule.Replace("{{" + replace + "}}", replacement);
+                parts.Add(finalRule);
+            }
+
+            // rebuild setting with replacements
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < parts.Count; i++) {
+                var part = parts[i];                
+                sb.Append(part);
+                if (i < parts.Count - 1)
+                    sb.Append(", ");
+            }
+
+            string setting = sb.ToString();
+            settings.CefCommandLineArgs.Add("host-resolver-rules", setting);
+
+        }
+
         /// <summary>
         /// Enables requests to certain schemes (http, https and scchrom) to be exchanged and manipulated.
         /// Also adds the scchrom scheme to provide scchrom internal stuff like the editors help content.
@@ -277,7 +356,7 @@ namespace ScChrom {
 
                 string[] whitelistEntries = whitelistString.Split("|".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
-                foreach (string entry in whitelistEntries) {                    
+                foreach (string entry in whitelistEntries) {
                     whitelist.Add(new RequestIdentifier(entry));
                 }
             }
@@ -297,7 +376,7 @@ namespace ScChrom {
             var js_rewriteHandler = Tools.Arguments.GetStackedArguments("exchange-response-utf8_script");
             if (js_rewriteHandler != null) {
                 js_Rewrites = new List<Tuple<RequestIdentifier, string>>();
-                foreach (var rrh in js_rewriteHandler) {                    
+                foreach (var rrh in js_rewriteHandler) {
                     var filter = new RequestIdentifier(rrh.Key);
                     js_Rewrites.Add(new Tuple<RequestIdentifier, string>(filter, rrh.Value));
                 }
@@ -343,7 +422,6 @@ namespace ScChrom {
                 _instance = null;
                 Instance.Start();
             }
-            
         }
 
         public void WriteOut(string text) {
